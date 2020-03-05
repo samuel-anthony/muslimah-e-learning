@@ -19,7 +19,7 @@
                     </div>
                     <button type="submit" class="btn btn-success">Login</button>
                 </form>
-                <p class="text-right">Tidak Terdaftar? <a href="">Hubungi Kami</a></p>
+                <p class="text-right">Tidak Terdaftar? <a href="contactus">Hubungi Kami</a></p>
             </div>
         </div>
     </div>

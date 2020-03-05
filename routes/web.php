@@ -14,7 +14,17 @@
 
 
 Route::get('/','CustomLoginController@index')->name('login');
+Route::get('/contactus','CustomLoginController@contactus');
 
 Auth::routes();
 
 Route::post('/login','CustomLoginController@login');
+
+
+Route::prefix('user')->group(function (){    
+    Route::get('/','UserController@index');
+});
+
+Route::prefix('admin')->group(function (){    
+    Route::get('/','AdminController@index');
+});
