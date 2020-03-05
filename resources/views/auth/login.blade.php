@@ -1,14 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <title>MT Ummahat</title>
-</head>
+@extends('layouts.app')
 
-<body>
+@section('content')
     <div class="container">
         <div class="row py-5">
             <h1 class="col-12 text-center text-white">MT Ummahat</h1>
@@ -30,10 +22,4 @@
             </div>
         </div>
     </div>
-
-    <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
-    <script src="/assets/js/jquery-1.12.4.js"></script>
-    <script src="/assets/js/popper.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection
