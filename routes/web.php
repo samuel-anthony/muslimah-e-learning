@@ -16,3 +16,5 @@
 Route::get('/','CustomLoginController@index')->name('login');
 
 Auth::routes();
+
+Route::post('/login','CustomLoginController@login');

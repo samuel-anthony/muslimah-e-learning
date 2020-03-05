@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @auth
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/home">
             <img src="https://pbs.twimg.com/profile_images/413090483162734592/BTChv6kh_400x400.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -38,7 +39,8 @@
             </div>
         </div>
     </nav>
-
+    @endauth
+    
     @if (session('alert'))
     <div class="alert alert-success">
         {{ session('alert') }}

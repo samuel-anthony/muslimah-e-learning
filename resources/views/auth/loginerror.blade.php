@@ -11,11 +11,14 @@
                     @csrf
                     <div class="form-group">
                         <label for="userId">User ID</label>
-                        <input type="text" class="form-control" id="userId" placeholder="Enter User ID" name="userid" required>
+                        <input type="text" class="form-control is-invalid" id="userId" placeholder="Enter User ID" name="userid" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+                        <input type="password" class="form-control is-invalid" id="password" placeholder="Enter Password" name="password" required>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$error_message}}</strong>
+                        </span>
                     </div>
                     <button type="submit" class="btn btn-success">Login</button>
                 </form>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class CustomLoginController extends Controller
 {
     public function __construct()
@@ -38,7 +38,7 @@ class CustomLoginController extends Controller
         else{
             return view('auth.loginerror',[
                 'user_name' => request('user_name'),
-                'error_message' => 'User Not Found'
+                'error_message' => 'The Credential Doesn\'t Match'
             ]);
         }
     }
