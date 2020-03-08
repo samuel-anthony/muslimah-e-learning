@@ -16,6 +16,19 @@ class AdminController extends Controller
     public function index(){
         return view('admin.dashboard');
     }
+    
+    public function materi(){
+        return view('admin.materi');
+    }
+    
+    public function ujian(){
+        return view('admin.ujian');
+    }
+
+    public function anggota(){
+        return view('admin.anggota');
+    }
+
     public function register()
     {
         $validator = Validator::make(request()->input(), [

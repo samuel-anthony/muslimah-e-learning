@@ -30,6 +30,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(is_null($judul ?? null) || count($judul) <= 0)
+                                <tr>
+                                    <td colspan="5" class="text-center">Records Not Found</td>
+                                </tr>
+                                @else
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Judul_Name</td>
@@ -43,6 +48,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

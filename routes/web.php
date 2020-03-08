@@ -26,5 +26,8 @@ Route::prefix('user')->group(function (){
 });
 
 Route::prefix('admin')->group(function (){    
-    Route::get('/','AdminController@index');
+    Route::get('/','AdminController@index');  
+    Route::get('/materi','AdminController@materi');  
+    Route::get('/ujian','AdminController@ujian');  
+    Route::get('/anggota','AdminController@anggota');
 });
