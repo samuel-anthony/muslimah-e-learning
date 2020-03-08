@@ -19,13 +19,23 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @if(Auth::user()->isAdmin == 1)
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/admin/materi">Materi</a>
-                <a class="nav-item nav-link" href="/admin/anggota">Anggota</a>
-                <a class="nav-item nav-link" href="/admin/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="admin/materi">Materi</a>
+                <a class="nav-item nav-link" href="admin/anggota">Anggota</a>
+                <a class="nav-item nav-link" href="admin/ujian">Ujian</a>
             </div>
         </div>
+        @else
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="user/materi">Materi</a>
+                <a class="nav-item nav-link" href="user/anggota">Anggota</a>
+                <a class="nav-item nav-link" href="user/ujian">Ujian</a>
+            </div>
+        </div>
+        @endif
         <div class="dropdown">
             <a class="navbar-brand messages" data-toggle="modal" data-target="#modalNotification"><img src="/assets/image/admin_message.png" width="30" height="30" alt=""></a>
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"

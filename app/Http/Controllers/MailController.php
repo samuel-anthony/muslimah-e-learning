@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use \App\Mail\SendMail;
 use Illuminate\Http\Request;
-use App\project;
+use App\User;
 class MailController extends Controller
 {
-    public function mailsend($param){
-        $project = project::whereProjId($param)->first();
+    public function mailsendregister($userID,$unEncriptedPassword){
+        $user = User::find($userID);
         $details = [
-            'dear'=>'Dear, '.$project->client->cl_name,
-            'row1' => 'Here is your advertising report with following components : ',
-			'row2' => 'Requirement : '.$project->requirement,
-			'row3' => 'Content : '.$project->content,
-			'row4' => 'Thank you',
-            'image' => $project->media
+            'dear'=>'Yth, Bp/Ibu '.$user->first_name.' '.$user->last_name,
+            'row1' => 'Berikut adalah password yang bisa digunakan untuk login',
+			'row2' => 'Password : '.$unEncriptedPassword,
+			'row3' => '',
+			'row4' => 'Terima Kasih',
+            //'image' => $project->media
         ];
 
-        \Mail::to($project->client->cl_email)->send(new SendMail($details));
-        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully finish the project']);
+        \Mail::to($user->email)->send(new SendMail($details));
+        return redirect('/admin')->with('alertSuccess','successfully create to add new user');
     }
 }

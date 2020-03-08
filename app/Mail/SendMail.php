@@ -29,7 +29,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Advertising Report')->attachData(base64_decode($this->details['image']),'gambar.jpeg',[])
-                    ->view('email.sendmail');
+        return $this->subject('Pendaftaran untuk MT Ummahat')->view('email.sendmail');
     }
 }

@@ -26,18 +26,17 @@ class AdminController extends Controller
     }
 
     public function anggota(){
-        return view('admin.anggota');
+        return view('admin.anggota',[
+            'users'=>User::whereIsadmin(0)->get()
+        ]);
     }
 
     public function register()
     {
         $validator = Validator::make(request()->input(), [
-            'user_name' => 'required|unique:users|min:8|max:255',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|unique:users',
-            // 'password' => 'required|min:8',
-            // 'password_confirmation' => 'required_with:password|same:password',
             'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : ''    
         ],[
         ]);
@@ -45,14 +44,16 @@ class AdminController extends Controller
             $validator->validate();
         }
         $user = new User;
-        $user->user_name = request('user_name');
         $user->first_name = request('first_name');
         $user->last_name = request('last_name');
         $user->phone = request('phone');
         $user->email = request('email');
-        // $user->password = bcrypt(request('password'));
+        //ini buat randomize password
+        //ini di encrypt angka 1 nya jadi encript stirng, setiap kali dia panggil method bcrypt hasil nya pasti beda
+        //nti yang jadi passwordnya user adalah 7-10 string awal dari encryptan angka 1
+        $passwordUser = substr(bcrypt('1'),0,rand(8,11));
+        $user->password = bcrypt($passwordUser);
         $user->save();
-        return redirect('/admin')->with('alertSuccess','successfully create to add new user');
-    
+        return redirect('sendEmailRegister/'.$user->id.'/'.$passwordUser);
     }
 }

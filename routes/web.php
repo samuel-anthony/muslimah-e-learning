@@ -19,6 +19,7 @@ Route::get('/contactus','CustomLoginController@contactus');
 Auth::routes();
 
 Route::post('/login','CustomLoginController@login');
+Route::get('/sendEmailRegister/{id}/{pass}', 'mailController@mailsendregister');
 
 
 Route::prefix('user')->group(function (){    
@@ -30,4 +31,5 @@ Route::prefix('admin')->group(function (){
     Route::get('/materi','AdminController@materi');  
     Route::get('/ujian','AdminController@ujian');  
     Route::get('/anggota','AdminController@anggota');
+    Route::post('/tambahanggota','AdminController@register');
 });

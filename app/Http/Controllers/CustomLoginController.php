@@ -18,10 +18,10 @@ class CustomLoginController extends Controller
         return view('admin.hubungi');
     }
     public function login(){
-        $user = User::where('user_name',request('userid'))->get();
+        $user = User::where('email',request('userid'))->get();
         if(count($user)>0){
             if(Auth::attempt([
-                'user_name'=>request('userid'),
+                'email'=>request('userid'),
                 'password'=>request('password')
             ])){
                 if($user[0]->isInactive == 0){//user nya masi aktif
