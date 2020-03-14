@@ -15,7 +15,7 @@ class CreateMaterisTable extends Migration
     {
         Schema::create('materis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('week');//mgg ke berapa maksudnya ini
+            $table->integer('week');//mgg ke berapa maksudnya ini
             $table->string('title');
             $table->longText('content');
             $table->timestamps();

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\User;
+use Validator;
 class UserController extends Controller
 {
     public function __construct()
@@ -38,6 +39,7 @@ class UserController extends Controller
 
     }
     public function postChangeProfile(){
+        //dd(request()->input());
         $validator = Validator::make(request()->input(), [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
@@ -47,5 +49,12 @@ class UserController extends Controller
         if ($validator->fails()) {
             $validator->validate();
         }
+        $user = User::find(request('id'));
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
+        $user->email = request('email');
+        $user->phone = request('phone');
+        $user->save();
+        return redirect('/user/profile');
     }
 }

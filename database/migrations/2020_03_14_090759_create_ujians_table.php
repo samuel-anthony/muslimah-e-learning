@@ -15,7 +15,7 @@ class CreateUjiansTable extends Migration
     {
         Schema::create('ujians', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->int('week');//minggu ke berapa
+            $table->integer('week');//minggu ke berapa
             $table->longText('all_of_the_questions');
             $table->longText('all_of_the_multiple_choices');
             $table->timestamps();

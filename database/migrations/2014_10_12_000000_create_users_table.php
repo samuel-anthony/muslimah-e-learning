@@ -17,13 +17,13 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('isInactive')->default(0);
             $table->boolean('isAdmin')->default(0);
-            $table->string('class_id');
+            $table->string('groupid')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -26,6 +26,8 @@ Route::prefix('user')->group(function (){
     Route::get('/','UserController@index');
     Route::get('/profile','UserController@profile');
     Route::get('/ubahpassword','UserController@changepassword');
+    
+    Route::post('/profile','UserController@postChangeProfile');
 });
 
 Route::prefix('admin')->group(function (){    
@@ -33,5 +35,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/materi','AdminController@materi');  
     Route::get('/ujian','AdminController@ujian');  
     Route::get('/anggota','AdminController@anggota');
+    Route::get('/group','AdminController@group');
     Route::post('/tambahanggota','AdminController@register');
+    Route::post('/group','AdminController@tambahGroup');
 });

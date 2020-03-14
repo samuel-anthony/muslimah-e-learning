@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\group;
 use Validator;
-
+use DateTime;
 class AdminController extends Controller
 {
     public function __construct()
@@ -13,22 +14,49 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
+    public function isAdmin(){//untuk ngecek yang login uda bener admin bukan user...
+        $user = \Auth::user();//ambil data user yang login dan berusaha akses menu di bawah 
+        return $user->isAdmin;//kembalikan nilai bahwa user ini admin atau bukan..
+    }
+
     public function index(){
-        return view('admin.dashboard');
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.dashboard');
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
     }
     
     public function materi(){
-        return view('admin.materi');
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.materi');
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
     }
     
     public function ujian(){
-        return view('admin.ujian');
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.ujian');
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
+    }
+
+    public function group(){
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.group',[
+                //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
+                'groups'=>group::all()
+            ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
     }
 
     public function anggota(){
-        return view('admin.anggota',[
-            'users'=>User::whereIsadmin(0)->get()
-        ]);
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.anggota',[
+                'users'=>User::whereIsadmin(0)->get()//variable user yang bukan admin dilempar ke depan
+            ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
     }
 
     public function register()
@@ -55,5 +83,22 @@ class AdminController extends Controller
         $user->password = bcrypt($passwordUser);
         $user->save();
         return redirect('sendEmailRegister/'.$user->id.'/'.$passwordUser);
+    }
+
+    public function tambahGroup()
+    {
+        $validator = Validator::make(request()->input(), [
+            'group_name' => 'required|unique:groups',
+            'group_strt_dt' => 'required',   
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $group = new group;
+        $group->group_name = request('group_name');
+        $group->group_strt_dt = DateTime::createFromFormat('Y-m-d',request('group_strt_dt'));
+        $group->save();
+        return redirect('admin/group');
     }
 }
