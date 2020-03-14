@@ -22,17 +22,17 @@
         @if(Auth::user()->isAdmin == 1)
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="admin/materi">Materi</a>
-                <a class="nav-item nav-link" href="admin/anggota">Anggota</a>
-                <a class="nav-item nav-link" href="admin/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="/admin/materi">Materi</a>
+                <a class="nav-item nav-link" href="/admin/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="/admin/anggota">Anggota</a>
             </div>
         </div>
         @else
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="user/materi">Materi</a>
-                <a class="nav-item nav-link" href="user/anggota">Anggota</a>
-                <a class="nav-item nav-link" href="user/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="/user/materi">Materi</a>
+                <a class="nav-item nav-link" href="/user/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="/user/profile">Profil</a>
             </div>
         </div>
         @endif

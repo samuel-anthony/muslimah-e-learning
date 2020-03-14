@@ -20,19 +20,20 @@
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="userId">User ID</label>
-                                <input type="text" class="form-control" id="userId" placeholder="Enter User ID" name="userid" required>
+                                <input type="text" class="form-control" id="userId" placeholder="Enter User ID" name="userid" required disabled value="{{Auth::user()->id}}">
+                                <input type="text" class="form-control" id="userId" placeholder="Enter User ID" name="userid" style="display:none" value="{{Auth::user()->id}}">
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" placeholder="Enter Nama" name="nama" required>
+                                <input type="text" class="form-control" id="nama" placeholder="Enter Nama" name="nama" required value="{{Auth::user()->id}}">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                                <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required value="{{Auth::user()->id}}">
                             </div>
                             <div class="form-group">
                                 <label for="nomor">No Hp</label>
-                                <input type="number" class="form-control" id="nomor" placeholder="Enter No Hp" name="nomor" required>
+                                <input type="number" class="form-control" id="nomor" placeholder="Enter No Hp" name="nomor" required value="{{Auth::user()->id}}">
                             </div>
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </form>

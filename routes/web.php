@@ -24,6 +24,8 @@ Route::get('/sendEmailRegister/{id}/{pass}', 'mailController@mailsendregister');
 
 Route::prefix('user')->group(function (){    
     Route::get('/','UserController@index');
+    Route::get('/profile','UserController@profile');
+    Route::get('/ubahpassword','UserController@changepassword');
 });
 
 Route::prefix('admin')->group(function (){    
