@@ -7,13 +7,62 @@
                 <h2>Ujian</h2>
                 
                 <div class="row mt-5">
-                    <div class="col-8">
+                    <div class="col-12">
                         <form action="" method="post">
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Enter Judul" name="judul" required>
+                            <div class="form-group row">
+                                <label for="examTitle" class="col-3 inputRequired">Exam Title*</label>
+								<div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="examTitle" placeholder="Enter Title" name="examTitle" required>
                             </div>
-                            <button type="submit" class="btn btn-success">Tambah Ujian</button>
+                            <div class="form-group row">
+                                <label for="examDate" class="col-3 inputRequired">Exam Date*</label>
+								<div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="examDate" placeholder="Enter Date" name="examDate" required>
+                            </div>
+							<div class="form-group row">
+                                <label for="examTime" class="col-3 inputRequired">Exam Time*</label>
+								<div class="col-1">:</div>
+                                <input type="text" class="form-control col-3" id="examTime" placeholder="Enter Time" name="examTime" required>
+                            </div>
+							<div class="form-group row">
+                                <label for="examDuration" class="col-3 inputRequired">Exam Duration*</label>
+								<div class="col-1">:</div>
+								<select class="form-control col-3" id="examDuration" name="examDuration" required>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+							</div>
+							<div class="form-group row">
+                                <label for="examQuestion" class="col-3 inputRequired">Total Question*</label>
+								<div class="col-1">:</div>
+								<select class="form-control col-3" id="examQuestion" name="examQuestion" required>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+							</div>
+							<div class="form-group row">
+                                <label for="examRight" class="col-3 inputRequired">Mark for Right Answer*</label>
+								<div class="col-1">:</div>
+								<select class="form-control col-3" id="examRight" name="examRight" required>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+							</div>
+							<div class="form-group row">
+                                <label for="examWrong" class="col-3 inputRequired">Mark for Wrong Answer*</label>
+								<div class="col-1">:</div>
+								<select class="form-control col-3" id="examWrong" name="examWrong" required>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+							<div class="row justify-content-center">
+								<button type="submit" class="btn btn-success">Tambah Ujian</button>
+							</div>
                         </form>
                     </div>
                 </div>
@@ -25,7 +74,7 @@
                                 <tr>
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="55%">Judul</th>
-                                    <th scope="col" width="20%">Tanggal</th>
+                                    <th scope="col" width="20%">Pertanyaan</th>
                                     <th scope="col" width="20%">Action</th>
                                 </tr>
                             </thead>
@@ -38,7 +87,7 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Judul_Name</td>
-                                    <td>Tanggal_date</td>
+                                    <td><a href="">Liat Pertanyaan</a></td>
                                     <td style="display: flex; justify-content: space-around;">
                                         <form id="button-yes-judul{{$judul->judul_id}}" class="submitForm" action="/admin/approve/judul" method="POST">@csrf<input for="judul" name="judul" value="{{$judul->judul_id}}" style="display:none"><input for="adm" name="adm" value="{{$admin->adm_id}}" style="display:none">
                                             <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>

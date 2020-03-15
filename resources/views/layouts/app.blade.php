@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="/assets/css/jquery.timepicker.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <title>MT Ummahat</title>
 </head>
@@ -38,7 +40,6 @@
         </div>
         @endif
         <div class="dropdown">
-            <a class="navbar-brand messages" data-toggle="modal" data-target="#modalNotification"><img src="/assets/image/admin_message.png" width="30" height="30" alt=""></a>
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Settings
@@ -68,6 +69,9 @@
     <script src="/assets/js/jquery-1.12.4.js"></script>
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+	<script src="/assets/js/jquery-ui.min.js"></script>
+	<script src="/assets/js/jquery.timepicker.min.js"></script>
+	<script src="/assets/js/index.js"></script>
 </body>
 
 </html>
