@@ -22,17 +22,6 @@
                         </form>
                     </div>
                 </div>
-
-				<div class="row mt-5 mr-1  justify-content-end">
-					<button class="btn btn-primary dropdown-toggle" type="button" id="filterButton"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Filter List
-					</button>
-					<div class="dropdown-menu" aria-labelledby="filterButton">
-						<a class="dropdown-item" href="">Group 1</a>
-						<a class="dropdown-item" href="">Group 2</a>
-					</div>
-				</div>
 		
                 <div class="row mt-3">
                     <div class="col-12">
