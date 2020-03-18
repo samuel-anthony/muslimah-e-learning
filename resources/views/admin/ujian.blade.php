@@ -8,32 +8,34 @@
                 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <form action="" method="post">
+                        <form action="/admin/ujian" method="post">
+                            @csrf
                             <div class="form-group row">
                                 <label for="examTitle" class="col-3 inputRequired">Exam Title*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="examTitle" placeholder="Enter Title" name="examTitle" required>
+                                <input type="text" class="form-control col-7" id="examTitle" placeholder="Enter Title" name="exam_title" required>
                             </div>
                             <div class="form-group row">
-                                <label for="examDate" class="col-3 inputRequired">Exam Date*</label>
+                                <label for="examDate" class="col-3 inputRequired">Exam Week*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="examDate" placeholder="Enter Date" name="examDate" required>
+                                <input type="number" class="form-control col-7" id="examWeek" placeholder="Enter Week" name="week" required>
                             </div>
-							<div class="form-group row">
+							<!-- <div class="form-group row">
                                 <label for="examTime" class="col-3 inputRequired">Exam Time*</label>
 								<div class="col-1">:</div>
                                 <input type="text" class="form-control col-3" id="examTime" placeholder="Enter Time" name="examTime" required>
-                            </div>
+                            </div> -->
 							<div class="form-group row">
                                 <label for="examDuration" class="col-3 inputRequired">Exam Duration*</label>
 								<div class="col-1">:</div>
-								<select class="form-control col-3" id="examDuration" name="examDuration" required>
+                                <input type="number" class="form-control col-7" id="exam_duration" placeholder="Enter Exam Duration in minutes" name="exam_duration" required>
+								<!-- <select class="form-control col-3" id="examDuration" name="examDuration" required>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
-                                </select>
+                                </select> -->
 							</div>
-							<div class="form-group row">
+							<!-- <div class="form-group row">
                                 <label for="examQuestion" class="col-3 inputRequired">Total Question*</label>
 								<div class="col-1">:</div>
 								<select class="form-control col-3" id="examQuestion" name="examQuestion" required>
@@ -59,7 +61,7 @@
                                     <option>2</option>
                                     <option>3</option>
                                 </select>
-                            </div>
+                            </div> -->
 							<div class="row justify-content-center">
 								<button type="submit" class="btn btn-success">Tambah Ujian</button>
 							</div>
@@ -74,29 +76,32 @@
                                 <tr>
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="55%">Judul</th>
-                                    <th scope="col" width="20%">Pertanyaan</th>
+                                    <th scope="col" width="20%">Minggu ke</th>
+                                    <th scope="col" width="20%">Waktu</th>
                                     <th scope="col" width="20%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(is_null($judul ?? null) || count($judul) <= 0)
+                                @if(is_null($ujians ?? null) || count($ujians) <= 0)
                                 <tr>
-                                    <td colspan="5" class="text-center">Records Not Found</td>
+                                    <td colspan="6" class="text-center">Records Not Found</td>
                                 </tr>
                                 @else
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Judul_Name</td>
-                                    <td><a href="">Liat Pertanyaan</a></td>
-                                    <td style="display: flex; justify-content: space-around;">
-                                        <form id="button-yes-judul{{$judul->judul_id}}" class="submitForm" action="/admin/approve/judul" method="POST">@csrf<input for="judul" name="judul" value="{{$judul->judul_id}}" style="display:none"><input for="adm" name="adm" value="{{$admin->adm_id}}" style="display:none">
-                                            <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>
-                                        </form>
-                                        <form id="button-no-judul{{$judul->judul_id}}" class="submitForm" action="/admin/disapprove/judul" method="POST">@csrf<input for="judul" name="judul" value="{{$judul->judul_id}}" style="display:none"><input for="adm" name="adm" value="{{$admin->adm_id}}" style="display:none">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    @php($num = 1)
+                                    @foreach($ujians as $ujian)
+                                        <tr>
+                                            <th scope="row">{{$num}}</th>
+                                            <td>{{$ujian->exam_title}}</td>
+                                            <td>{{$ujian->week}}</td>
+                                            <td>{{$ujian->exam_duration}} menit</td>
+                                            <td style="display: flex; justify-content: space-around;">
+                                                <form class="submitForm" action="/admin/editUjian/{{$ujian->id}}" method="GET">
+                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
                                 @endif
                             </tbody>
                         </table>

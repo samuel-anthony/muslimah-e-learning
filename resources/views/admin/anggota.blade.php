@@ -26,6 +26,15 @@
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Masukan Email" name="email" required>
                             </div>
+                            <div class="form-group">
+                                <label for="group_id" class="col-3">Group</label>
+								<select class="form-control" id="group_id" name="group_id" required>
+                                    <option value="">Please pick one of the group</option>
+                                    @foreach($groups as $group)
+                                        <option value="{{$group->id}}">{{$group->group_name}}</option>    
+                                    @endforeach
+                                </select>
+							</div>
                             <button type="submit" class="btn btn-success">Tambah Anggota</button>
                         </form>
                     </div>
@@ -37,8 +46,10 @@
 						Filter List
 					</button>
 					<div class="dropdown-menu" aria-labelledby="filterButton">
-						<a class="dropdown-item" href="">Group 1</a>
-						<a class="dropdown-item" href="">Group 2</a>
+                        <a class="dropdown-item" href="">No Filter</a>
+                        @foreach($groups as $group)            
+                            <a class="dropdown-item" href="">{{$group->group_name}}</a>
+						@endforeach
 					</div>
 				</div>
 				

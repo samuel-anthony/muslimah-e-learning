@@ -16,7 +16,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="judul">Group Mulai</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Enter Hari Mulai Group(Y-m-d)" name="group_strt_dt" required>
+                                <input type="text" class="form-control" id="datepicker" placeholder="Enter Hari Mulai Group(Y-m-d)" name="group_strt_dt" required>
                             </div>
                             <button type="submit" class="btn btn-success">Submit Group Baru</button>
                         </form>

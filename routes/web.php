@@ -36,6 +36,10 @@ Route::prefix('admin')->group(function (){
     Route::get('/ujian','AdminController@ujian');  
     Route::get('/anggota','AdminController@anggota');
     Route::get('/group','AdminController@group');
+    Route::get('/editUjian/{id}','AdminController@editUjian');
+
     Route::post('/tambahanggota','AdminController@register');
     Route::post('/group','AdminController@tambahGroup');
+    Route::post('/ujian','AdminController@tambahUjian');
+    Route::post('/submitPertanyaan','AdminController@submitPertanyaan');
 });

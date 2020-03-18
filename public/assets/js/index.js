@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#examDate").datepicker();
+    $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
 	$('#examTime').timepicker({
 		timeFormat: 'h:mm p',
 		interval: 60,
