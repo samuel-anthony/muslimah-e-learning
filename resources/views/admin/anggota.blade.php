@@ -81,7 +81,7 @@
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->email}}</td>
                                             <td class="text-center">0</td><!--masi belom ada relasi-->
-                                            <td class="text-center">{{$group->group_name}}</td>
+                                            <td class="text-center">{{$user->groupid}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
