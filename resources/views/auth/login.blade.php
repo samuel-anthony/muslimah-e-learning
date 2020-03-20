@@ -17,7 +17,7 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success px-5">Login</button>
                 </form>
                 <p class="text-right">Tidak Terdaftar? <a href="contactus">Hubungi Kami</a></p>
             </div>

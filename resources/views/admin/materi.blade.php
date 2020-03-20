@@ -7,13 +7,16 @@
                 <h2>Materi</h2>
                 
                 <div class="row mt-5">
-                    <div class="col-8">
+                    <div class="col-12">
                         <form action="" method="post">
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Enter Judul" name="judul" required>
+                            <div class="form-group row">
+                                <label for="judul" class="col-3 inputRequired">Judul*</label>
+                                <div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="judul" placeholder="Enter Judul" name="judul" required>
                             </div>
-                            <button type="submit" class="btn btn-success">New Post</button>
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-success">New Post</button>
+							</div>
                         </form>
                     </div>
                 </div>
@@ -22,11 +25,11 @@
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Judul</th>
-                                    <th scope="col" width="20%">Tanggal</th>
-                                    <th scope="col" width="20%">Action</th>
+                                    <th scope="col" width="50%">Judul</th>
+                                    <th scope="col" width="30%">Tanggal</th>
+                                    <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,7 +39,7 @@
                                 </tr>
                                 @else
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <td scope="row" class="text-center">1</td>
                                     <td>Judul_Name</td>
                                     <td>Tanggal_date</td>
                                     <td style="display: flex; justify-content: space-around;">

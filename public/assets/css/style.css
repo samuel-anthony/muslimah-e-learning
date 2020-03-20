@@ -5,3 +5,7 @@ body {
 .inputRequired {
     font-weight: bold;
 }
+
+.dropdown-menu.show {
+    left: -60px;
+}

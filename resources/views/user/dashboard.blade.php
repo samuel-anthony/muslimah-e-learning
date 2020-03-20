@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-4">
                         <a href="/user/ujian">
-                            <div class="">
+                            <div class="mx-3">
                                 <img src="https://pbs.twimg.com/profile_images/413090483162734592/BTChv6kh_400x400.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
                                 <h4>Ujian</h4>
                             </div>

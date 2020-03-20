@@ -73,24 +73,24 @@
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Judul</th>
-                                    <th scope="col" width="20%">Minggu ke</th>
-                                    <th scope="col" width="20%">Waktu</th>
-                                    <th scope="col" width="20%">Action</th>
+                                    <th scope="col" width="30%">Judul</th>
+                                    <th scope="col" width="25%">Minggu ke</th>
+                                    <th scope="col" width="25%">Waktu</th>
+                                    <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(is_null($ujians ?? null) || count($ujians) <= 0)
                                 <tr>
-                                    <td colspan="6" class="text-center">Records Not Found</td>
+                                    <td colspan="5" class="text-center">Records Not Found</td>
                                 </tr>
                                 @else
                                     @php($num = 1)
                                     @foreach($ujians as $ujian)
                                         <tr>
-                                            <th scope="row">{{$num}}</th>
+                                            <td scope="row" class="text-center">{{$num}}</td>
                                             <td>{{$ujian->exam_title}}</td>
                                             <td>{{$ujian->week}}</td>
                                             <td>{{$ujian->exam_duration}} menit</td>

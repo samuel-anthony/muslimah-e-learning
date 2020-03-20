@@ -7,17 +7,21 @@
                 <h2>Password</h2>
                 
                 <div class="row mt-5">
-                    <div class="col-8">
+                    <div class="col-12">
                         <form action="" method="post">
-                            <div class="form-group">
-                                <label for="oldPassword">Password Lama</label>
-                                <input type="text" class="form-control" id="oldPassword" placeholder="Enter Old Password" name="oldPassword" required>
+                            <div class="form-group row">
+                                <label for="oldPassword" class="col-3 inputRequired">Password Lama*</label>
+                                <div class="col-1">:</div>
+                                <input type="password" class="form-control col-7" id="oldPassword" placeholder="Enter Old Password" name="oldPassword" minlength="6" maxlength="10" required>
                             </div>
-                            <div class="form-group">
-                                <label for="newPassword">Password Baru</label>
-                                <input type="password" class="form-control" id="newPassword" placeholder="Enter New Password" name="newPassword" required>
+                            <div class="form-group row">
+                                <label for="newPassword" class="col-3 inputRequired">Password Baru*</label>
+                                <div class="col-1">:</div>
+                                <input type="password" class="form-control col-7" id="newPassword" placeholder="Enter New Password" name="newPassword" minlength="6" maxlength="10" required>
                             </div>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-success">Simpan</button>
+							</div>
                         </form>
                     </div>
                 </div>

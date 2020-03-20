@@ -19,22 +19,22 @@
 							<div class="form-group row">
                                 <label for="pilihan1" class="col-3 inputRequired">Pilihan A*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="pilihan1" placeholder="Enter Title" name="jawaban_a" required>
+                                <input type="text" class="form-control col-7" id="pilihan1" placeholder="Enter Selection" name="jawaban_a" required>
                             </div>
 							<div class="form-group row">
                                 <label for="pilihan2" class="col-3 inputRequired">Pilihan B*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="pilihan2" placeholder="Enter Title" name="jawaban_b" required>
+                                <input type="text" class="form-control col-7" id="pilihan2" placeholder="Enter Selection" name="jawaban_b" required>
                             </div>
 							<div class="form-group row">
                                 <label for="pilihan3" class="col-3 inputRequired">Pilihan C*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="pilihan3" placeholder="Enter Title" name="jawaban_c" required>
+                                <input type="text" class="form-control col-7" id="pilihan3" placeholder="Enter Selection" name="jawaban_c" required>
                             </div>
 							<div class="form-group row">
                                 <label for="pilihan4" class="col-3 inputRequired">Pilihan D*</label>
 								<div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="pilihan4" placeholder="Enter Title" name="jawaban_d" required>
+                                <input type="text" class="form-control col-7" id="pilihan4" placeholder="Enter Selection" name="jawaban_d" required>
                             </div>
 							<div class="form-group row">
                                 <label for="answer" class="col-3 inputRequired">Jawaban*</label>
@@ -57,10 +57,10 @@
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Pertanyaan</th>
-                                    <th scope="col" width="20%">Pilihan Jawaban</th>
+                                    <th scope="col" width="30%">Pertanyaan</th>
+                                    <th scope="col" width="25%">Pilihan Jawaban</th>
                                     <th scope="col" width="20%">Jawaban Benar</th>
                                     <th scope="col" width="20%">Action</th>
                                 </tr>
@@ -74,7 +74,7 @@
                                     @php($num = 1)
                                     @foreach($soals as $soal)
                                         <tr>
-                                            <th scope="row">{{$num}}</th>
+                                            <td scope="row" class="text-center">{{$num}}</td>
                                             <td>{{$soal->soal_ujian}}</td>
                                             <td>
                                                 A. {{$soal->jawaban_a}}<br>

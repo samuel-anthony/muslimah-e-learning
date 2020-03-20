@@ -11,27 +11,27 @@
                         <form action="tambahanggota" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="userId" class="col-3">Nama Depan</label>
+                                <label for="userId" class="col-3 inputRequired">Nama Depan*</label>
                                 <div class="col-1">:</div>
                                 <input type="text" class="form-control col-7" placeholder="Masukan Nama Depan" name="first_name" required>
                             </div>
                             <div class="form-group row">
-                                <label for="userId" class="col-3">Nama Belakang</label>
+                                <label for="userId" class="col-3 inputRequired">Nama Belakang*</label>
                                 <div class="col-1">:</div>
                                 <input type="text" class="form-control col-7" placeholder="Masukan Nama Belakang" name="last_name" required>
                             </div>
                             <div class="form-group row">
-                                <label for="nomor" class="col-3">No Handphone</label>
+                                <label for="nomor" class="col-3 inputRequired">No Handphone*</label>
                                 <div class="col-1">:</div>
                                 <input type="number" class="form-control col-7" id="nomor" placeholder="Masukan No Hp" name="phone" required>
                             </div>
                             <div class="form-group row">
-                                <label for="email" class="col-3">Email</label>
+                                <label for="email" class="col-3 inputRequired">Email*</label>
                                 <div class="col-1">:</div>
                                 <input type="email" class="form-control col-7" id="email" placeholder="Masukan Email" name="email" required>
                             </div>
                             <div class="form-group row">
-                                <label for="group_id" class="col-3">Group</label>
+                                <label for="group_id" class="col-3 inputRequired">Group*</label>
                                 <div class="col-1">:</div>
 								<select class="form-control col-2" id="group_id" name="group_id" required>
                                     <option value="">Please Pick One</option>
@@ -76,12 +76,12 @@
                                     @php($num = 1)
                                     @foreach($users as $user)
                                         <tr class="content">
-                                            <td scope="row" class="font-weight-bold text-center">{{$num}}</td>
+                                            <td scope="row" class="text-center">{{$num}}</td>
                                             <td>{{$user->first_name}}&nbsp;{{$user->last_name}}</td>
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->email}}</td>
                                             <td class="text-center">0</td><!--masi belom ada relasi-->
-                                            <td class="text-center">{{$user->groupid}}</td>
+                                            <td class="text-center">{{$user->group->group_name}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>

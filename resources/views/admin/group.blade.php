@@ -7,27 +7,31 @@
                 <h2>Group</h2>
                 
                 <div class="row mt-5">
-                    <div class="col-8">
+                    <div class="col-12">
                         <form action="/admin/group" method="post">
                             @csrf
-                            <div class="form-group">
-                                <label for="judul">Nama Group</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Enter Nama Group" name="group_name" required>
+                            <div class="form-group row">
+                                <label for="judul" class="col-3 inputRequired">Nama Group*</label>
+                                <div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="judul" placeholder="Enter Nama Group" name="group_name" required>
                             </div>
-                            <div class="form-group">
-                                <label for="judul">Group Mulai</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Enter Hari Mulai Group (Y-m-d)" name="group_strt_dt" required>
+                            <div class="form-group row">
+                                <label for="judul" class="col-3 inputRequired">Group Mulai*</label>
+                                <div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Enter Hari Mulai Group (Y-m-d)" name="group_strt_dt" required>
                             </div>
-                            <button type="submit" class="btn btn-success">Submit Group Baru</button>
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-success">Submit Group Baru</button>
+							</div>
                         </form>
                     </div>
                 </div>
 		
-                <div class="row mt-3">
+                <div class="row mt-5">
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="55%">Nama Group</th>
                                     <th scope="col" width="20%">Hari Group Mulai</th>
@@ -39,9 +43,9 @@
                                     @php($num=1)
                                     @foreach($groups as $group)
                                         <tr>
-                                            <td scope="col" width="5%">{{$num}}</td>
-                                            <td scope="col" width="55%">{{$group->group_name}}</td>
-                                            <td scope="col" width="20%">{{$group->group_strt_dt}}</td>
+                                            <td scope="col" width="5%" class="text-center">{{$num}}</td>
+                                            <td scope="col" width="50%">{{$group->group_name}}</td>
+                                            <td scope="col" width="25%">{{$group->group_strt_dt}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
