@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-8 bg-light rounded py-4 px-5">
-                <h2>Samuel Anthony (Lulus 0 dari 5 ujian)</h2>
+                <h2>{{Auth::user()->first_name}}&nbsp;{{Auth::user()->last_name}} (Lulus 0 dari 5 ujian)</h2>
                 <div class="row my-4">
                     <div class="col-4">
                         <a href="/user/materi">

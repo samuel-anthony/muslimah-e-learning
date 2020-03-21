@@ -18,10 +18,10 @@ class CustomLoginController extends Controller
         return view('admin.hubungi');
     }
     public function login(){
-        $user = User::where('email',request('userid'))->get();
+        $user = User::where('email',request('email'))->get();
         if(count($user)>0){
             if(Auth::attempt([
-                'email'=>request('userid'),
+                'email'=>request('email'),
                 'password'=>request('password')
             ])){
                 if($user[0]->isInactive == 0){//user nya masi aktif
@@ -32,20 +32,20 @@ class CustomLoginController extends Controller
                 }
                 else
                     return view('auth.loginerror',[
-                        'user_name' => request('userid'),
+                        'user_name' => request('email'),
                         'error_message' => 'User is Inactive'
                     ]);
             }
             else{
                 return view('auth.loginerror',[
-                    'user_name' => request('userid'),
+                    'user_name' => request('email'),
                     'error_message' => 'The Credential Doesn\'t Match'
                 ]);
             }
         }
         else{
             return view('auth.loginerror',[
-                'user_name' => request('userid'),
+                'user_name' => request('email'),
                 'error_message' => 'The Credential Doesn\'t Match'
             ]);
         }

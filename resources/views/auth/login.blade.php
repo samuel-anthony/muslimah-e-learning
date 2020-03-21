@@ -10,8 +10,8 @@
                 <form action="/login" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="userId">User ID</label>
-                        <input type="text" class="form-control" id="userId" placeholder="Enter User ID" name="userid" required>
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

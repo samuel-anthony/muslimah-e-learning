@@ -95,7 +95,7 @@ class AdminController extends Controller
         $user->email = request('email');
         $user->groupid = request('group_id');
         //ini buat randomize password
-        //ini di encrypt angka 1 nya jadi encript stirng, setiap kali dia panggil method bcrypt hasil nya pasti beda
+        //ini di encrypt angka 1 nya jadi encript string, setiap kali dia panggil method bcrypt hasil nya pasti beda
         //nti yang jadi passwordnya user adalah 7-10 string awal dari encryptan angka 1
         $passwordUser = substr(bcrypt('1'),0,rand(8,11));
         $user->password = bcrypt($passwordUser);

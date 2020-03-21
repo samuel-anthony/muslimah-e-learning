@@ -55,6 +55,6 @@ class UserController extends Controller
         $user->email = request('email');
         $user->phone = request('phone');
         $user->save();
-        return redirect('/user/profile');
+        return redirect('/user');
     }
 }
