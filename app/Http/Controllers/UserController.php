@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use Validator;
 class UserController extends Controller
@@ -36,7 +37,26 @@ class UserController extends Controller
     
     }
     public function postChangepassword(){
+        $user = \Auth::user();
 
+        $validator = Validator::make(request()->input(), [
+            'oldPassword' => 'required',
+            'newPassword' => 'required|different:oldPassword',
+        ]);
+        
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        if (Hash::check(request('oldPassword'), $user->password)) { 
+           $user->fill([
+            'password' => Hash::make(request('newpassword'))
+            ])->save();
+        
+            return redirect('user');
+        
+        } else {
+            return redirect('user/ubahpassword');
+        }
     }
     public function postChangeProfile(){
         //dd(request()->input());

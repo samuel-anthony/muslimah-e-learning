@@ -8,7 +8,8 @@
                 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <form action="" method="post">
+                        <form action="/user/ubahpassword" method="post">
+                            @csrf
                             <div class="form-group row">
                                 <label for="oldPassword" class="col-3 inputRequired">Password Lama*</label>
                                 <div class="col-1">:</div>

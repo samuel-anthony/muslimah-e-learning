@@ -28,6 +28,7 @@ Route::prefix('user')->group(function (){
     Route::get('/ubahpassword','UserController@changepassword');
     
     Route::post('/profile','UserController@postChangeProfile');
+    Route::post('/ubahpassword','UserController@postChangepassword');
 });
 
 Route::prefix('admin')->group(function (){    
