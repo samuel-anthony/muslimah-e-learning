@@ -98,6 +98,9 @@
                                                 <form class="submitForm" action="/admin/editUjian/{{$ujian->id}}" method="GET">
                                                     <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>
                                                 </form>
+                                                <form class="submitForm" action="/admin/deleteUjian" method="POST">@csrf<input name="id" value="{{$ujian->id}}" style="display:none">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @php($num++)

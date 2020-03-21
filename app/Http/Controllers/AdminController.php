@@ -66,12 +66,31 @@ class AdminController extends Controller
 
     public function editUjian($param){
         if($this->isAdmin())//klo admin larikan ke view di bawah
-            
             return view('admin.pertanyaan',[
                 'ujian'=> ujian::find($param),
                 'soals'=> pertanyaan::whereUjianId($param)->get(),
                 'soalKe' => count(pertanyaan::whereUjianId($param)->get())+1
             ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
+    }
+
+    public function editPertanyaan($param){
+        if($this->isAdmin()){//klo admin larikan ke view di bawah
+            $pertanyaan = pertanyaan::find($param);
+            $soals = pertanyaan::whereUjianId($pertanyaan->ujian_id)->get();//semua soal 
+            $soalKe = 1;
+            foreach($soals as $soal){ //ini buat cari tau id bangsul ini sebenernya soal(yang mau diedit) keberapa yang diinput oleh user 
+                if($soal->id == $pertanyaan->id)
+                    break;
+                $soalKe++;
+            }
+            return view('admin.pertanyaan',[
+                'ujian'=> ujian::find($pertanyaan->ujian_id),
+                'soals'=> $soals,
+                'soalKe'=> $soalKe
+            ]);
+        }
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
@@ -139,6 +158,16 @@ class AdminController extends Controller
 
         return redirect('/admin/editUjian/'.$ujian->id);
     }
+
+    public function submitEditUjian(){
+        $ujian = ujian::find(request('ujian_id'));
+        $ujian->exam_title  = request('exam_title');
+        $ujian->week  = request('week');
+        $ujian->exam_duration  = request('exam_duration');
+        $ujian->save();
+        return redirect('/admin/editUjian/'.request('ujian_id'));
+    }
+
     public function submitPertanyaan(){
         $pertanyaan = new pertanyaan;
         $pertanyaan->ujian_id  = request('ujian_id');
@@ -151,5 +180,37 @@ class AdminController extends Controller
         $pertanyaan->save();
 
         return redirect('/admin/editUjian/'.$pertanyaan->ujian_id);
+    }
+
+    public function submitEditPertanyaan(){
+        $pertanyaan = pertanyaan::find(request('soal_id'));
+        $pertanyaan->soal_ujian  = request('soal_ujian');
+        $pertanyaan->jawaban_a  = request('jawaban_a');
+        $pertanyaan->jawaban_b  = request('jawaban_b');
+        $pertanyaan->jawaban_c  = request('jawaban_c');
+        $pertanyaan->jawaban_d  = request('jawaban_d');
+        $pertanyaan->jawaban_benar  = request('jawaban_benar');
+        $pertanyaan->save();
+
+        return redirect('/admin/editUjian/'.$pertanyaan->ujian_id);
+    }
+
+    public function deletePertanyaan(){
+
+        $pertanyaan = pertanyaan::find(request('id'));
+        $ujian_id = $pertanyaan->ujian_id;
+        $pertanyaan->delete();
+
+        return redirect('/admin/editUjian/'.$ujian_id);
+    }
+
+    public function deleteUjian(){
+        $ujian = ujian::find(request('id'));
+        $pertanyaans = pertanyaan::whereUjianId(request('id'))->get();
+        foreach($pertanyaans as $pertanyaan){
+            $pertanyaan->delete();
+        }
+        $ujian->delete();
+        return redirect('/admin/ujian');
     }
 }

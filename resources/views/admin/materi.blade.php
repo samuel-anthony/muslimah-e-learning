@@ -12,8 +12,14 @@
                             <div class="form-group row">
                                 <label for="judul" class="col-2 inputRequired">Judul*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="judul" placeholder="Enter Judul" name="judul" required>
+                                <input type="text" class="form-control col-7"  placeholder="Enter Judul" name="title" required>
                             </div>
+                            <div class="form-group row">
+                                <label for="judul" class="col-2 inputRequired">Minggu*</label>
+                                <div class="col-1">:</div>
+                                <input type="number" class="form-control col-7" placeholder="Enter Minggu keberapa materi ini di post" name="week" required>
+                            </div>
+                            
                             <div class="row justify-content-center">
                                 <button type="submit" class="btn btn-success">New Post</button>
 							</div>
