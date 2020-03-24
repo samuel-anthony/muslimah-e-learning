@@ -13,7 +13,11 @@
 <body>
     @auth
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/home">
+        @if(Auth::user()->isAdmin == 1)
+        <a class="navbar-brand" href="/admin">
+        @else
+        <a class="navbar-brand" href="/user">
+        @endif
             <img src="https://pbs.twimg.com/profile_images/413090483162734592/BTChv6kh_400x400.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
             MT Ummamat
         </a>

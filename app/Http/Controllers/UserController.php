@@ -55,7 +55,7 @@ class UserController extends Controller
             return redirect('user');
         
         } else {
-            return redirect('user/ubahpassword');
+            return redirect('/user');
         }
     }
     public function postChangeProfile(){
