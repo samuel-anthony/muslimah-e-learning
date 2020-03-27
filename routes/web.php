@@ -14,6 +14,7 @@
 
 
 Route::get('/','CustomLoginController@index')->name('login');
+Route::get('/home','CustomLoginController@index');
 Route::get('/contactus','CustomLoginController@contactus');
 
 Auth::routes();

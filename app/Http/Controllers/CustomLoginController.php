@@ -12,6 +12,13 @@ class CustomLoginController extends Controller
         //$this->middleware('auth');
     }
     public function index(){
+        $user = \Auth::user();
+        if(!is_null($user)){
+            if($user->isAdmin == 0)//user biasa bukan admin
+                return redirect('/user');
+            else
+                return redirect('/admin');
+        }
         return view('auth.login');
     }
     public function contactus(){
