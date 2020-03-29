@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/anggota','AdminController@anggota');
     Route::get('/group','AdminController@group');
     Route::get('/editUjian/{id}','AdminController@editUjian');
+    Route::get('/editMateri/{id}','AdminController@editMateri');
     Route::get('/editPertanyaan/{id}','AdminController@editPertanyaan');
 
     Route::post('/tambahanggota','AdminController@register');
@@ -49,4 +50,5 @@ Route::prefix('admin')->group(function (){
     Route::post('/submitPertanyaan','AdminController@submitPertanyaan');
     Route::post('/submitEditPertanyaan','AdminController@submitEditPertanyaan');
     Route::post('/deletePertanyaan','AdminController@deletePertanyaan');
+    Route::post('/materi','AdminController@tambahMateri');
 });

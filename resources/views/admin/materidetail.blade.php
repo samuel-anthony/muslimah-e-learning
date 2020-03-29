@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Judul_Materi</h2>
+                <h2>{{$materi->title}}</h2>
                 
                 <div class="row mt-5">
                     <div class="col-12">
@@ -29,6 +29,17 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        
+        <div class="row mt-3 justify-content-center">
+            <div class="col-10 bg-light rounded py-4 px-5">
+                <h2>Preview</h2>
+                <h4>Yang nanti dilihat oleh user</h4>
+                
+                
+                
             </div>
         </div>
     </div>

@@ -8,7 +8,8 @@
                 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <form action="" method="post">
+                        <form action="/admin/materi" method="post">
+                            @csrf
                             <div class="form-group row">
                                 <label for="judul" class="col-2 inputRequired">Judul*</label>
                                 <div class="col-1">:</div>
@@ -34,29 +35,32 @@
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="50%">Judul</th>
-                                    <th scope="col" width="30%">Tanggal</th>
+                                    <th scope="col" width="30%">Minggu</th>
                                     <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(is_null($judul ?? null) || count($judul) <= 0)
+                                @if(is_null($materis ?? null) || count($materis) <= 0)
                                 <tr>
                                     <td colspan="5" class="text-center">Records Not Found</td>
                                 </tr>
                                 @else
-                                <tr>
-                                    <td scope="row" class="text-center">1</td>
-                                    <td>Judul_Name</td>
-                                    <td>Tanggal_date</td>
-                                    <td style="display: flex; justify-content: space-around;">
-                                        <form id="button-yes-judul{{$judul->judul_id}}" class="submitForm" action="/admin/approve/judul" method="POST">@csrf<input for="judul" name="judul" value="{{$judul->judul_id}}" style="display:none"><input for="adm" name="adm" value="{{$admin->adm_id}}" style="display:none">
-                                            <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>
-                                        </form>
-                                        <form id="button-no-judul{{$judul->judul_id}}" class="submitForm" action="/admin/disapprove/judul" method="POST">@csrf<input for="judul" name="judul" value="{{$judul->judul_id}}" style="display:none"><input for="adm" name="adm" value="{{$admin->adm_id}}" style="display:none">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    @php($num=1)
+                                    @foreach($materis as $materi)
+                                        <tr>
+                                            <td scope="row" class="text-center">{{$num++}}</td>
+                                            <td>{{$materi->title}}</td>
+                                            <td>{{$materi->week}}</td>
+                                            <td style="display: flex; justify-content: space-around;">
+                                                <form  class="submitForm" action="/admin/editMateri/{{$materi->id}}" method="GET">
+                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Edit</button>
+                                                </form>
+                                                <form class="submitForm" action="/admin/deleteMateri" method="POST">@csrf<input name="id" value="{{$materi->id}}" style="display:none">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endif
                             </tbody>
                         </table>

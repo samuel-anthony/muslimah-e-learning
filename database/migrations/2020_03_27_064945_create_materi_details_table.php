@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaterisTable extends Migration
+class CreateMateriDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMaterisTable extends Migration
      */
     public function up()
     {
-        Schema::create('materis', function (Blueprint $table) {
+        Schema::create('materi_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('week');//mgg ke berapa maksudnya ini
-            $table->string('title');
+            $table->string('materi_id');
+            $table->string('type');//should be in txt / img
+            $table->longText('value');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMaterisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materis');
+        Schema::dropIfExists('materi_details');
     }
 }

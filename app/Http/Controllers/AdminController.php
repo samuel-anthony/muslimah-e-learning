@@ -7,6 +7,7 @@ use App\User;
 use App\group;
 use App\ujian;
 use App\pertanyaan;
+use App\materi;
 use Validator;
 use DateTime;
 class AdminController extends Controller
@@ -30,7 +31,9 @@ class AdminController extends Controller
     
     public function materi(){
         if($this->isAdmin())//klo admin larikan ke view di bawah
-            return view('admin.materi');
+            return view('admin.materi',[
+                'materis' => materi::all()
+            ]);
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
@@ -70,6 +73,15 @@ class AdminController extends Controller
                 'ujian'=> ujian::find($param),
                 'soals'=> pertanyaan::whereUjianId($param)->get(),
                 'soalKe' => count(pertanyaan::whereUjianId($param)->get())+1
+            ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
+    }
+
+    public function editMateri($param){
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.materidetail',[
+                'materi'=> materi::find($param)
             ]);
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
@@ -212,5 +224,22 @@ class AdminController extends Controller
         }
         $ujian->delete();
         return redirect('/admin/ujian');
+    }
+
+
+    public function tambahMateri(){
+        $validator = Validator::make(request()->input(), [
+            'week' => 'unique:materis|gt:0',
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $materi = new materi;
+        $materi->title = request('title');
+        $materi->week = request('week');
+        $materi->save();
+
+        return redirect('/admin/editMateri/'.$materi->id);
     }
 }
