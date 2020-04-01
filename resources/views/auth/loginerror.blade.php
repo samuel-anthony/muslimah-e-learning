@@ -11,16 +11,16 @@
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control is-invalid" id="email" placeholder="Enter Email" name="email" required>
+                        <input type="text" class="form-control is-invalid" id="email" placeholder="Masukkan Email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control is-invalid" id="password" placeholder="Enter Password" name="password" required>
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" class="form-control is-invalid" id="password" placeholder="Masukkan Kata Sandi" name="password" required>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{$error_message}}</strong>
                         </span>
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success">Masuk</button>
                 </form>
                 <p class="text-right">Tidak Terdaftar? <a href="">Hubungi Kami</a></p>
             </div>

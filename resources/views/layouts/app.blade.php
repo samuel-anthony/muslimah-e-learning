@@ -30,7 +30,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/admin/materi">Materi</a>
                 <a class="nav-item nav-link" href="/admin/ujian">Ujian</a>
-                <a class="nav-item nav-link" href="/admin/group">Group</a>
+                <a class="nav-item nav-link" href="/admin/group">Grup</a>
                 <a class="nav-item nav-link" href="/admin/anggota">Anggota</a>
             </div>
         </div>
@@ -45,14 +45,14 @@
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Settings
+                Pengaturan
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @if(Auth::user()->isAdmin==0)
                 <a class="dropdown-item" href="/user/profile">Profil</a>
                 @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Keluar') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
             </div>
         </div>

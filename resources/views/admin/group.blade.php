@@ -4,24 +4,24 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Group</h2>
+                <h2>Grup</h2>
                 
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/admin/group" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="judul" class="col-3 inputRequired">Nama Group*</label>
+                                <label for="judul" class="col-3 inputRequired">Nama Grup*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="judul" placeholder="Enter Nama Group" name="group_name" required>
+                                <input type="text" class="form-control col-7" id="judul" placeholder="Masukkan Nama Group" name="group_name" required>
                             </div>
                             <div class="form-group row">
                                 <label for="judul" class="col-3 inputRequired">Group Mulai*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Enter Hari Mulai Group (Y-m-d)" name="group_strt_dt" required>
+                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Masukkan Hari Mulai Group (Y-m-d)" name="group_strt_dt" required>
                             </div>
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-success">Submit Group Baru</button>
+                                <button type="submit" class="btn btn-success">Tambah Grup</button>
 							</div>
                         </form>
                     </div>
@@ -33,9 +33,9 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Nama Group</th>
-                                    <th scope="col" width="20%">Hari Group Mulai</th>
-                                    <th scope="col" width="20%">Action</th>
+                                    <th scope="col" width="55%">Nama Grup</th>
+                                    <th scope="col" width="20%">Hari Grup Mulai</th>
+                                    <th scope="col" width="20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,7 +48,7 @@
                                             <td scope="col" width="25%">{{$group->group_strt_dt}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form>
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -56,7 +56,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Records Not Found</td>
+                                        <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
                                     </tr>
                                 @endif
                             </tbody>

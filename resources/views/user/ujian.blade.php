@@ -9,10 +9,10 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="form-group row">
-                            <label for="group_id" class="col-3 inputRequired">Select Ujian*</label>
+                            <label for="group_id" class="col-3 inputRequired">Pilih Ujian*</label>
                             <div class="col-1">:</div>
                             <select class="form-control col-4" id="group_id" name="group_id" required>
-                                    <option value="">Please Pick One</option>
+                                    <option value="">Pilih Salah Satu Ujian</option>
                                     <option value="ujian1">Ujian 1</option>
                                     <option value="ujian2">Ujian 2</option>
                             </select>
@@ -34,7 +34,7 @@
                             <p class="col-7">materi_ujian</p>
                         </div>
                         <div class="row">
-                            <label for="userId" class="col-4">Durasi Mengerjakan</label>
+                            <label for="userId" class="col-4">Durasi Pengerjaan</label>
                             <div class="col-1">:</div>
                             <p class="col-7">durasi_pengerjaan</p>
                         </div>

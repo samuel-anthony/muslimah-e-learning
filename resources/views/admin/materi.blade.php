@@ -11,18 +11,18 @@
                         <form action="/admin/materi" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="judul" class="col-2 inputRequired">Judul*</label>
+                                <label for="judul" class="col-2 inputRequired">Judul Materi*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7"  placeholder="Enter Judul" name="title" required>
+                                <input type="text" class="form-control col-7"  placeholder="Masukkan Judul Materi" name="title" required>
                             </div>
                             <div class="form-group row">
-                                <label for="judul" class="col-2 inputRequired">Minggu*</label>
+                                <label for="judul" class="col-2 inputRequired">Minggu ke*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" placeholder="Enter Minggu keberapa materi ini di post" name="week" required>
+                                <input type="number" class="form-control col-7" placeholder="Masukkan Minggu keberapa materi ini di pos" name="week" required>
                             </div>
                             
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-success">New Post</button>
+                                <button type="submit" class="btn btn-success">Tambah Materi</button>
 							</div>
                         </form>
                     </div>
@@ -35,14 +35,14 @@
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="50%">Judul</th>
-                                    <th scope="col" width="30%">Minggu</th>
+                                    <th scope="col" width="30%">Minggu ke</th>
                                     <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(is_null($materis ?? null) || count($materis) <= 0)
                                 <tr>
-                                    <td colspan="5" class="text-center">Records Not Found</td>
+                                    <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
                                 </tr>
                                 @else
                                     @php($num=1)

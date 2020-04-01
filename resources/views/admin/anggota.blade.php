@@ -13,28 +13,28 @@
                             <div class="form-group row">
                                 <label for="userId" class="col-3 inputRequired">Nama Depan*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" placeholder="Masukan Nama Depan" name="first_name" required>
+                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Depan" name="first_name" required>
                             </div>
                             <div class="form-group row">
                                 <label for="userId" class="col-3 inputRequired">Nama Belakang*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" placeholder="Masukan Nama Belakang" name="last_name" required>
+                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Belakang" name="last_name" required>
                             </div>
                             <div class="form-group row">
-                                <label for="nomor" class="col-3 inputRequired">No Handphone*</label>
+                                <label for="nomor" class="col-3 inputRequired">Nomor Telepon*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" id="nomor" placeholder="Masukan No Hp" name="phone" required>
+                                <input type="number" class="form-control col-7" id="nomor" placeholder="Masukkan Nomor Telepon" name="phone" required>
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-3 inputRequired">Email*</label>
                                 <div class="col-1">:</div>
-                                <input type="email" class="form-control col-7" id="email" placeholder="Masukan Email" name="email" required>
+                                <input type="email" class="form-control col-7" id="email" placeholder="Masukkan Email" name="email" required>
                             </div>
                             <div class="form-group row">
-                                <label for="group_id" class="col-3 inputRequired">Group*</label>
+                                <label for="group_id" class="col-3 inputRequired">Grup*</label>
                                 <div class="col-1">:</div>
 								<select class="form-control col-2" id="group_id" name="group_id" required>
-                                    <option value="">Please Pick One</option>
+                                    <option value="">Pilih Salah Satu Grup</option>
                                     @foreach($groups as $group)
                                         <option value="{{$group->id}}">{{$group->group_name}}</option>    
                                     @endforeach
@@ -49,7 +49,7 @@
 				
                 <div class="row mt-5 mr-1 justify-content-end">
                     <select id='filterText' style='display:inline-block' onchange='filterText()' class="btn btn-primary">
-                        <option disabled selected>Filter List</option>
+                        <option disabled selected>Daftar Filter</option>
                         <option value='all'>All</option>
                         @foreach($groups as $group)
                             <option class="dropdown-item" value='{{$group->group_name}}'>{{$group->group_name}}</option>
@@ -64,11 +64,11 @@
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="20%">Nama</th>
-                                    <th scope="col" width="20%">Nomor HP</th>
+                                    <th scope="col" width="20%">Nomor Telepon</th>
                                     <th scope="col" width="20%">Email</th>
                                     <th scope="col" width="20%">Total Lulus Ujian</th>
-                                    <th scope="col" width="10%">Group</th>
-                                    <th scope="col" width="5%">Action</th>
+                                    <th scope="col" width="10%">Grup</th>
+                                    <th scope="col" width="5%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +84,7 @@
                                             <td class="text-center">{{$user->group->group_name}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form>
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -92,7 +92,7 @@
                                     @endforeach
                                 @else
                                     <tr class="content">
-                                        <td colspan="7" class="text-center">Records Not Found</td>
+                                        <td colspan="7" class="text-center">Data Tidak Ditemukan</td>
                                     </tr>
                                 @endif
                             </tbody>
