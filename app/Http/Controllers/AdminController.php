@@ -8,6 +8,7 @@ use App\group;
 use App\ujian;
 use App\pertanyaan;
 use App\materi;
+use App\materi_detail;
 use Validator;
 use DateTime;
 class AdminController extends Controller
@@ -86,7 +87,16 @@ class AdminController extends Controller
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
-
+    
+    public function editMateriDetailPage($param1,$param2){
+        if($this->isAdmin())//klo admin larikan ke view di bawah
+            return view('admin.materidetailedit',[
+                'materi'=> materi_detail::find($param2)
+            ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
+    }
+    
     public function editPertanyaan($param){
         if($this->isAdmin()){//klo admin larikan ke view di bawah
             $pertanyaan = pertanyaan::find($param);
@@ -241,5 +251,79 @@ class AdminController extends Controller
         $materi->save();
 
         return redirect('/admin/editMateri/'.$materi->id);
+    }
+
+    public function submitMateriDetail(){
+        if(request('materi_type')=="biasa"){
+            $validator = Validator::make(request()->input(), [
+                'paragraph' => 'required',
+            ],[
+            ]);
+        }
+        else{
+            $validator = Validator::make(request()->file(), [
+                'file' => 'required',
+            ],[
+            ]);
+        }
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $materi_detail = new materi_detail;
+        if(request('materi_type')=="file_upload"){
+            $path = request()->file('file')->getRealPath();
+            $image = file_get_contents($path);
+            $base64 = base64_encode($image);
+            $materi_detail->type = $_FILES['file']['type'];
+            $materi_detail->value = $base64;
+        }
+        else if(request('materi_type')=="biasa"){
+            $materi_detail->type = "paragraph";
+            $materi_detail->value = request('paragraph');
+        }
+        $materi_detail->materi_id = request("materi_id");
+        $materi_detail->save();
+        
+        return redirect('/admin/editMateri/'.request("materi_id"));
+    }
+
+    public function editMateriDetail(){
+        if(request('materi_type')=="biasa"){
+            $validator = Validator::make(request()->input(), [
+                'paragraph' => 'required',
+            ],[
+            ]);
+        }
+        else{
+            $validator = Validator::make(request()->file(), [
+                'file' => 'required',
+            ],[
+            ]);
+        }
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $materi_detail = materi_detail::find(request('id'));
+        if(request('materi_type')=="file_upload"){
+            $path = request()->file('file')->getRealPath();
+            $image = file_get_contents($path);
+            $base64 = base64_encode($image);
+            $materi_detail->type = $_FILES['file']['type'];
+            $materi_detail->value = $base64;
+        }
+        else if(request('materi_type')=="biasa"){
+            $materi_detail->type = "paragraph";
+            $materi_detail->value = request('paragraph');
+        }
+        $materi_detail->save();
+        
+        return redirect('/admin/editMateri/'.$materi_detail->materi_id);
+    }
+
+    public function deleteMateriDetail(){
+        $materi_detail = materi_detail::find(request("id"));
+        $materi_detail->delete();
+        
+        return redirect('/admin/editMateri/'.request("mstr_id"));
     }
 }
