@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\ujian;
+use App\materi;
 use Validator;
 class UserController extends Controller
 {
@@ -21,6 +23,34 @@ class UserController extends Controller
         if(!$this->isAdmin())//klo bukan admin larikan ke view di bawah
             return view('user.dashboard');
         else//user admin berusaha open url dari user, jangan bole.. redirect kembali ke /admin
+            return redirect('admin');
+    }
+    public function materi(){
+        if(!$this->isAdmin()){
+            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            return view('user.materi',[
+                "materis"=>materi::where('week','<=',$currentWeek)->get()
+            ]);
+        }
+        else
+            return redirect('admin');
+    }
+    public function openMateri($param){
+        if(!$this->isAdmin())
+            return view('user.openmateri',[
+                "materi"=>materi::find($param)
+            ]);
+        else
+            return redirect('admin');
+    }
+    public function ujian(){
+        if(!$this->isAdmin()){
+            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            return view('user.ujian',[
+                "ujians"=>ujian::where('week','<=',$currentWeek)->get()
+            ]);
+        }
+        else
             return redirect('admin');
     }
     public function profile(){

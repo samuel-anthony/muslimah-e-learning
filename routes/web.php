@@ -27,7 +27,10 @@ Route::prefix('user')->group(function (){
     Route::get('/','UserController@index');
     Route::get('/profile','UserController@profile');
     Route::get('/ubahpassword','UserController@changepassword');
-    
+    Route::get('/materi','UserController@materi');  
+    Route::get('/openMateri/{id}','UserController@openMateri');  
+    Route::get('/ujian','UserController@ujian');  
+
     Route::post('/profile','UserController@postChangeProfile');
     Route::post('/ubahpassword','UserController@postChangepassword');
 });
