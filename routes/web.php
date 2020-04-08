@@ -33,6 +33,8 @@ Route::prefix('user')->group(function (){
 
     Route::post('/profile','UserController@postChangeProfile');
     Route::post('/ubahpassword','UserController@postChangepassword');
+    Route::post('/ujian','UserController@ujianStart');  
+
 });
 
 Route::prefix('admin')->group(function (){    

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\ujian;
+use App\user_ujian;
 use App\materi;
 use Validator;
 class UserController extends Controller
@@ -46,8 +47,11 @@ class UserController extends Controller
     public function ujian(){
         if(!$this->isAdmin()){
             $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
-            return view('user.ujian',[
-                "ujians"=>ujian::where('week','<=',$currentWeek)->get()
+            $ujians = ujian::where('week','<=',$currentWeek)->get();
+            foreach($ujians as $ujian){
+                $ujian->end_date = date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt." + ".$ujian->week." weeks"));
+            }return view('user.ujian',[
+                "ujians"=> $ujians
             ]);
         }
         else
@@ -106,5 +110,21 @@ class UserController extends Controller
         $user->phone = request('phone');
         $user->save();
         return redirect('/user');
+    }
+
+    public function ujianStart(){
+        $ujian_id = request('ujian_id');
+        $user = \Auth::user(); 
+        $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian_id)->get();
+        if(count($user_ujian)==0){
+            $user_ujian = new user_ujian;
+            $user_ujian->ujian_id = $ujian_id;
+            $user_ujian->user_id = $user->id;
+            $user_ujian->save();
+        }
+        return view('user.ujiandetail',[
+            "user_ujian"=>$user_ujian[0]
+        ]);
+
     }
 }

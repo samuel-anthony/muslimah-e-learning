@@ -40,4 +40,7 @@ class User extends Authenticatable
     public function group(){
         return $this->hasOne('App\group','id','groupid');
     }
+    public function user_ujian(){
+        return $this->belongsTo('App\user_ujian','id','user_id');
+    }
 }
