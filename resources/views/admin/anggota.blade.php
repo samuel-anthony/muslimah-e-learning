@@ -33,7 +33,7 @@
                             <div class="form-group row">
                                 <label for="group_id" class="col-3 inputRequired">Grup*</label>
                                 <div class="col-1">:</div>
-								<select class="form-control col-2" id="group_id" name="group_id" required>
+								<select class="form-control col-3" id="group_id" name="group_id" required>
                                     <option value="">Pilih Salah Satu Grup</option>
                                     @foreach($groups as $group)
                                         <option value="{{$group->id}}">{{$group->group_name}}</option>    

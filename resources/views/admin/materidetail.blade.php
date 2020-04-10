@@ -14,8 +14,8 @@
                                 <label for="file_upload" class="col-3">Pilih jenis materi baru</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <select class="form-control col-7" id="materi_type" name="materi_type" required>
-                                    <option value="file_upload">unggah file</option>
-                                    <option value="biasa" selected>manual</option>
+                                    <option value="biasa" selected>Manual</option>
+                                    <option value="file_upload">Unggah File</option>
                                 </select>
                             </div>
                             <input style="display:none" name="materi_id" value="{{$materi->id}}">
@@ -54,23 +54,34 @@
             <div class="col-10 bg-light rounded py-4 px-5">
                 <h2>Pratinjau</h2>
                 <br>
-                <button id="show">tampilkan garis dan tombol</button>
+                <div class="row justify-content-end mr-1 mb-3">
+                    <button id="show" class="btn btn-primary">Tampilkan Garis dan Tombol</button>
+                </div>
                 <div class="preview">
                     @foreach($materi->materi_details as $detail)
-                        <div style="border-style:solid;border-width: 2px;">
-                            @if($detail->type == "paragraph")        
-                                <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$detail->value}}</p>
-                            @elseif($detail->type == "image/png")
-                                <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
-                            @endif
-                            <form action="/admin/editMateri/{{$detail->materi_id}}/{{$detail->id}}" method="GET">
-                                <button type="submit">ubah</button>
-                            </form>
-                            <form action="/admin/deleteMateriDetail" method="post">@csrf
-                                <input style="display:none" name="id" value="{{$detail->id}}">
-                                <input style="display:none" name="mstr_id" value="{{$detail->materi_id}}">
-                                <button type="submit">hapus</button>
-                            </form>
+                        <div style="border-style:solid;border-width: 2px;" class="mb-5">
+                            <div class="card">
+                                <h5 class="card-header"></h5>
+                                <div class="card-body">
+                                    @if($detail->type == "paragraph")        
+                                        <p class="card-text">{{$detail->value}}</p>
+                                    @elseif($detail->type == "image/png")
+                                        <div class="row justify-content-center">
+                                            <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px" alt="">
+                                        </div>
+                                    @endif
+                                    <div class="row justify-content-center mb-3">
+                                        <form action="/admin/editMateri/{{$detail->materi_id}}/{{$detail->id}}" method="GET">
+                                            <button type="submit" class="btn btn-primary mr-3">Ubah</button>
+                                        </form>
+                                        <form action="/admin/deleteMateriDetail" method="post">@csrf
+                                            <input style="display:none" name="id" value="{{$detail->id}}">
+                                            <input style="display:none" name="mstr_id" value="{{$detail->materi_id}}">
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -81,14 +92,21 @@
             <div class="col-10 bg-light rounded py-4 px-5">
                 <h2>Pratinjau</h2>
                 <br>
-                <button id="hide">tampilkan garis dan tombol</button>
-                <div class="preview">
+                <div class="row justify-content-end mr-1 mb-3">
+                    <button id="hide" class="btn btn-primary">Tampilkan Garis dan Tombol</button>
+                </div>
+                <div class="preview ">
                     @foreach($materi->materi_details as $detail)
-                        @if($detail->type == "paragraph")        
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$detail->value}}</p>
-                        @elseif($detail->type == "image/png")
-                            <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
-                        @endif
+                        <div class="card mb-5">
+                            <h5 class="card-header"></h5>
+                            @if($detail->type == "paragraph")        
+                                <p class="card-text">{{$detail->value}}</p>
+                            @elseif($detail->type == "image/png")
+                                <div class="row justify-content-center">
+                                    <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
+                                </div>
+                            @endif
+                        </div>
                     @endforeach
                 </div>
             </div>

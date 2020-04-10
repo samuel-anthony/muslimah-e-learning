@@ -7,13 +7,20 @@
                 <h2>{{$materi->title}}</h2>
                 <br>
                 <div class="preview">
-                    @foreach($materi->materi_details as $detail)
-                        @if($detail->type == "paragraph")        
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$detail->value}}</p>
-                        @elseif($detail->type == "image/png")
-                            <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
-                        @endif
-                    @endforeach
+                    <div class="card">
+                        <h5 class="card-header"></h5>
+                        <div class="card-body">
+                            @foreach($materi->materi_details as $detail)
+                                @if($detail->type == "paragraph")        
+                                    <p class="card-text">{{$detail->value}}</p>
+                                @elseif($detail->type == "image/png")
+                                    <div class="row justify-content-center">
+                                        <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

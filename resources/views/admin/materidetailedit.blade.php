@@ -4,26 +4,30 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>{{$materi->materi->title}}</h2>
-                <br><br>
-                <h4>Materi original</h4>
-                @if($materi->type == "paragraph")        
-                    <p>{{$materi->value}}</p>
-                @elseif($materi->type == "image/png")
-                    <img src="data:image/png;base64,{{$materi->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
-                @endif
+                <h2 class="mb-5">{{$materi->materi->title}}</h2>
                 
-                <h4>Materi edit</h4>
-                <div class="row mt-5">
-                    <div class="col-12">
+                <div class="card mb-5">
+                    <h5 class="card-header">Materi Original</h5>
+                    @if($materi->type == "paragraph")        
+                        <p class="card-text ml-4">{{$materi->value}}</p>
+                    @elseif($materi->type == "image/png")
+                        <div class="row justify-content-center">
+                            <img src="data:image/png;base64,{{$materi->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
+                        </div>
+                    @endif
+                </div>
+
+                <div class="card">
+                    <h5 class="card-header">Materi Edit</h5>
+                    <div class="col-12 my-5">
                         <form action="/admin/editMateriDetail" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="file_upload" class="col-3">Pilih jenis materi baru</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <select class="form-control col-7" id="materi_type" name="materi_type" required>
-                                    <option value="file_upload" @if($materi->type !="paragraph") selected @endif>unggah file</option>
-                                    <option value="biasa" @if($materi->type =="paragraph") selected @endif>manual</option>
+                                    <option value="file_upload" @if($materi->type !="paragraph") selected @endif>Unggah file</option>
+                                    <option value="biasa" @if($materi->type =="paragraph") selected @endif>Manual</option>
                                 </select>
                             </div>
                             <input style="display:none" name="id" value="{{$materi->id}}">
@@ -58,6 +62,7 @@
                         </form>
                     </div>
                 </div>
-                
+            </div>
+        </div>
     </div>
 @endsection
