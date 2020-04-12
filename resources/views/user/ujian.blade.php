@@ -65,6 +65,10 @@
                                 $("#detail_durasi").html(data[index].exam_duration) ;
                                 $("#detail_waktu").html(data[index].end_date);
                                 $("#ujian_id").val(data[index].id);
+                                $("#button_mulai").show();
+                                if(data[index].expired){
+                                    $("#button_mulai").hide();
+                                }
                                 return false;
                             }
                         });
