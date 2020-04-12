@@ -44,6 +44,11 @@
                             <div class="col-1">:</div>
                             <p class="col-7" id="detail_waktu">waktu_penutupan</p>
                         </div>
+                        <div class="row">
+                            <label for="userId" class="col-4">Hasil Ujian</label>
+                            <div class="col-1">:</div>
+                            <p class="col-7" id="detail_hasil"></p>
+                        </div>
                     </div>
                     <form action="/user/ujian" method="post">
                         @csrf
@@ -68,7 +73,9 @@
                                 $("#button_mulai").show();
                                 if(data[index].expired){
                                     $("#button_mulai").hide();
+                                    $("#detail_hasil").html(data[index].total_correct+'/'+data[index].pertanyaans.length);
                                 }
+                                console.log(data[index].total_correct);
                                 return false;
                             }
                         });

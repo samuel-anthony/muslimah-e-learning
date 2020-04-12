@@ -59,8 +59,10 @@ class UserController extends Controller
                 $ujian->expired = ($time_diff->d < $time_diff2->d) && $time_diff2->d > 7 ? true : false;
                 $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId($ujian->id)->first();
                 if(!is_null($user_ujian)){
-                    $time_diff = (new Datetime())->diff($user_ujian->created_at);
-                    $duration = $ujian->exam_duration - $time_diff->i;
+                    // $time_diff = (new Datetime())->diff($user_ujian->created_at);
+                    // $duration = $ujian->exam_duration - $time_diff->i;
+                    $time_diff = round(abs(strtotime("now")-strtotime($user_ujian->created_at)) / 60,2);
+                    $duration = $ujian->exam_duration - $time_diff;
                     if($duration < 0 || $user_ujian->is_finished){
                         $ujian->expired = true;
                     }
@@ -68,6 +70,18 @@ class UserController extends Controller
                         $ujian->expired = false;
                     }
                 }
+                $ujian->total_correct = 0;
+                if($ujian->expired){
+                    foreach($user_ujian->user_ujian_details as $detil){
+                        foreach($ujian->pertanyaans as $pertanyaan){
+                            if($detil->pertanyaan_id == $pertanyaan->id){
+                                $ujian->total_correct++;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
             }
             return view('user.ujian',[
                 "ujians"=> $ujians
