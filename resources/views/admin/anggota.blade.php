@@ -13,22 +13,27 @@
                             <div class="form-group row">
                                 <label for="userId" class="col-3 inputRequired">Nama Depan*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Depan" name="first_name" required>
+                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Depan" name="first_name" required value="{{old('first_name')}}">
                             </div>
                             <div class="form-group row">
                                 <label for="userId" class="col-3 inputRequired">Nama Belakang*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Belakang" name="last_name" required>
+                                <input type="text" class="form-control col-7" placeholder="Masukkan Nama Belakang" name="last_name" required value="{{old('last_name')}}">
                             </div>
                             <div class="form-group row">
                                 <label for="nomor" class="col-3 inputRequired">Nomor Telepon*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" id="nomor" placeholder="Masukkan Nomor Telepon" name="phone" required>
+                                <input type="number" class="form-control col-7" id="nomor" placeholder="Masukkan Nomor Telepon" name="phone" required value="{{old('phone')}}">
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-3 inputRequired">Email*</label>
                                 <div class="col-1">:</div>
-                                <input type="email" class="form-control col-7" id="email" placeholder="Masukkan Email" name="email" required>
+                                <input type="email" class="form-control col-7 @error('email') is-invalid @enderror" id="email" placeholder="Masukkan Email" name="email" required value="{{old('email')}}">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label for="group_id" class="col-3 inputRequired">Grup*</label>
@@ -36,7 +41,7 @@
 								<select class="form-control col-3" id="group_id" name="group_id" required>
                                     <option value="">Pilih Salah Satu Grup</option>
                                     @foreach($groups as $group)
-                                        <option value="{{$group->id}}">{{$group->group_name}}</option>    
+                                        <option value="{{$group->id}}" @if($group->id == old('group_id'))selected @endif>{{$group->group_name}}</option>    
                                     @endforeach
                                 </select>
 							</div>
@@ -83,7 +88,7 @@
                                             <td class="text-center">0</td><!--masi belom ada relasi-->
                                             <td class="text-center">{{$user->group->group_name}}</td>
                                             <td style="display: flex; justify-content: space-around;">
-                                                <form>
+                                                <form action="deleteAnggota" method="post">@csrf<input name="id" value="{{$user->id}}" style="display:none">
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Hapus</button>
                                                 </form>
                                             </td>

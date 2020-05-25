@@ -13,12 +13,17 @@
                             <div class="form-group row">
                                 <label for="judul" class="col-3 inputRequired">Nama Grup*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="judul" placeholder="Masukkan Nama Group" name="group_name" required>
+                                <input type="text" class="form-control col-7 @error('group_name') is-invalid @enderror" id="judul" placeholder="Masukkan Nama Group" name="group_name" required  value="{{old('group_name')}}">
+                                @error('group_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label for="judul" class="col-3 inputRequired">Group Mulai*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Masukkan Hari Mulai Group (Y-m-d)" name="group_strt_dt" required>
+                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Masukkan Hari Mulai Group (Y-m-d)" name="group_strt_dt" required  value="{{old('group_strt_dt')}}">
                             </div>
                             <div class="row justify-content-center">
                                 <button type="submit" class="btn btn-success">Tambah Grup</button>

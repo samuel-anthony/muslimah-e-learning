@@ -14,6 +14,8 @@
                         <div class="row justify-content-center">
                             <img src="data:image/png;base64,{{$materi->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
                         </div>
+                    @elseif($materi->type == "application/pdf")
+                        <iframe src="data:application/pdf;base64,{{$materi->value}}" height="500" width="100%"></iframe> 
                     @endif
                 </div>
 
@@ -48,7 +50,7 @@
                             <div class="form-group row" id="file_upload" @if($materi->type =="paragraph") style="display:none" @endif>
                                 <label for="file_upload" class="col-3">Pilih file (TXT, PNG, 3GP)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp">
+                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form" @if($materi->type !="paragraph") style="display:none" @endif>
                                 <label for="paragraph" class="col-3">Paragrap</label>

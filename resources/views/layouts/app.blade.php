@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/assets/css/jquery-ui.css">
 	<link rel="stylesheet" href="/assets/css/jquery.timepicker.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <title>MT Ummahat</title>
+    <title>Sahabat Muslimah</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         @else
         <a class="navbar-brand" href="/user">
         @endif
-            MT Ummamat
+            Sahabat Muslimah
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

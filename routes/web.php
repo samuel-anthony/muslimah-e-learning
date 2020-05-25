@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function (){
 
 
     Route::post('/tambahanggota','AdminController@register');
+    Route::post('/deleteAnggota','AdminController@deleteAnggota');
     Route::post('/group','AdminController@tambahGroup');
     Route::post('/ujian','AdminController@tambahUjian');
     Route::post('/submitEditUjian','AdminController@submitEditUjian');

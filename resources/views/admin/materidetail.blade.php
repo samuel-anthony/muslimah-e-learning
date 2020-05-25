@@ -23,10 +23,10 @@
                             <div class="form-group row" id="file_upload" style="display:none">
                                 <label for="file_upload" class="col-3">Pilih file (TXT, PNG, 3GP)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp">
+                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form">
-                                <label for="paragraph" class="col-3">Paragrap</label>
+                                <label for="paragraph" class="col-3">Paragraf</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <textarea class="form-control col-7" name="paragraph" rows="5"name="txt"></textarea>
                             </div>
@@ -69,6 +69,8 @@
                                         <div class="row justify-content-center">
                                             <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px" alt="">
                                         </div>
+                                    @elseif($detail->type == "application/pdf")
+                                        <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
                                     @endif
                                     <div class="row justify-content-center mb-3">
                                         <form action="/admin/editMateri/{{$detail->materi_id}}/{{$detail->id}}" method="GET">
@@ -105,6 +107,8 @@
                                 <div class="row justify-content-center">
                                     <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
                                 </div>
+                            @elseif($detail->type == "application/pdf")
+                                <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
                             @endif
                         </div>
                     @endforeach

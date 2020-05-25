@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row py-5">
-            <h1 class="col-12 text-center text-white">MT Ummahat</h1>
+            <h1 class="col-12 text-center text-white">Sahabat Muslimah</h1>
         </div>
         <div class="row mt-3 justify-content-center">
             <div class="col-6 bg-light rounded py-4 px-5">

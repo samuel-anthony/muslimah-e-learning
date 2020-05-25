@@ -125,6 +125,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : '',
         ],[
+            'email.unique' => 'email sudah digunakan mohon pilih email lain'
         ]);
         if ($validator->fails()) {
             $validator->validate();
@@ -150,6 +151,7 @@ class AdminController extends Controller
             'group_name' => 'required|unique:groups',
             'group_strt_dt' => 'required',   
         ],[
+            'group_name.unique' => 'nama grup sudah digunakan, mohon pakai nama grup lain'
         ]);
         if ($validator->fails()) {
             $validator->validate();
@@ -236,6 +238,11 @@ class AdminController extends Controller
         return redirect('/admin/ujian');
     }
 
+    public function deleteAnggota(){
+        $user = User::find(request('id'));
+        $user->delete();
+        return redirect('/admin/anggota');
+    }
 
     public function tambahMateri(){
         $validator = Validator::make(request()->input(), [

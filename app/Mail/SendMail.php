@@ -29,6 +29,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Pendaftaran untuk MT Ummahat')->view('email.sendmail');
+        return $this->subject('Pendaftaran untuk Sahabat Muslimah')->view('email.sendmail');
     }
 }
