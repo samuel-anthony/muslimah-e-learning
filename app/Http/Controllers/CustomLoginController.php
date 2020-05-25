@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Auth;
+use App\User;//DATA DATABASE
+use Illuminate\Support\Facades\Auth;//INI UNTUK KEPENTINGAN LOGIN
 class CustomLoginController extends Controller
 {
     public function __construct()
@@ -12,7 +12,7 @@ class CustomLoginController extends Controller
         //$this->middleware('auth');
     }
     public function index(){
-        $user = \Auth::user();
+        $user = \Auth::user();//ngecek ad yang user login apa engga
         if(!is_null($user)){
             if($user->isAdmin == 0)//user biasa bukan admin
                 return redirect('/user');
@@ -21,6 +21,7 @@ class CustomLoginController extends Controller
         }
         return view('auth.login');
     }
+    
     public function contactus(){
         return view('admin.hubungi');
     }
@@ -56,5 +57,8 @@ class CustomLoginController extends Controller
                 'error_message' => 'The Credential Doesn\'t Match'
             ]);
         }
+    }
+    public function test(){
+        return view('test');
     }
 }

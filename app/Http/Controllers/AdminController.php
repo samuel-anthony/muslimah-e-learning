@@ -125,7 +125,8 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : '',
         ],[
-            'email.unique' => 'email sudah digunakan mohon pilih email lain'
+            'email.unique' => 'email sudah digunakan mohon pilih email lain',
+            'phone.regex' => 'mohon masukkan format nomor telepon yang sesuai'
         ]);
         if ($validator->fails()) {
             $validator->validate();

@@ -9,7 +9,7 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="tambahanggota" method="post">
-                            @csrf
+                            @csrf 
                             <div class="form-group row">
                                 <label for="userId" class="col-3 inputRequired">Nama Depan*</label>
                                 <div class="col-1">:</div>
@@ -23,7 +23,12 @@
                             <div class="form-group row">
                                 <label for="nomor" class="col-3 inputRequired">Nomor Telepon*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" id="nomor" placeholder="Masukkan Nomor Telepon" name="phone" required value="{{old('phone')}}">
+                                <input type="number" class="form-control col-7 @error('phone') is-invalid @enderror" id="nomor" placeholder="Masukkan Nomor Telepon" name="phone" required value="{{old('phone')}}">
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-3 inputRequired">Email*</label>

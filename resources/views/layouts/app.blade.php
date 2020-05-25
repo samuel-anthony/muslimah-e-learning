@@ -65,7 +65,7 @@
     @endif
 
     @yield('content')
-
+    
     <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
     <script src="/assets/js/jquery-1.12.4.js"></script>
     <script src="/assets/js/popper.min.js"></script>

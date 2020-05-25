@@ -19,6 +19,6 @@ class MailController extends Controller
         ];
 
         \Mail::to($user->email)->send(new SendMail($details));
-        return redirect('/admin')->with('alertSuccess','successfully create to add new user');
+        return redirect('/admin/anggota')->with('alertSuccess','successfully create to add new user');
     }
 }
