@@ -24,8 +24,15 @@ class UserController extends Controller
         return $user->isAdmin;//kembalikan nilai bahwa user ini admin atau bukan..
     }
     public function index(){
-        if(!$this->isAdmin())//klo bukan admin larikan ke view di bawah
-            return view('user.dashboard');
+        if(!$this->isAdmin()){//klo bukan admin larikan ke view di bawah
+            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $ujians = [];
+            if(date("Y-m-d")>=date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt)))
+                $ujians = ujian::where('week','<=',$currentWeek)->get();
+            return view('user.dashboard',[
+                'ujians'=>$ujians
+            ]);
+        }
         else//user admin berusaha open url dari user, jangan bole.. redirect kembali ke /admin
             return redirect('admin');
     }
@@ -74,7 +81,7 @@ class UserController extends Controller
                 if($ujian->expired){
                     foreach($user_ujian->user_ujian_details as $detil){
                         foreach($ujian->pertanyaans as $pertanyaan){
-                            if($detil->pertanyaan_id == $pertanyaan->id){
+                            if($detil->pertanyaan_id == $pertanyaan->id && $detil->jawaban == $pertanyaan->jawaban_benar){
                                 $ujian->total_correct++;
                                 break;
                             }
@@ -150,7 +157,9 @@ class UserController extends Controller
         $user = \Auth::user(); 
         $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian_id)->get();
         $duration = 30;
+        $flagNew = false;
         if(count($user_ujian)==0){
+            $flagNew = true;
             $user_ujian = new user_ujian;
             $user_ujian->ujian_id = $ujian_id;
             $user_ujian->user_id = $user->id;
@@ -162,8 +171,8 @@ class UserController extends Controller
         }
         if($duration>0)
             return view('user.ujiandetail',[
-                "user_ujian"=>$user_ujian[0],
-                "user_ujian_detail"=> !is_null($user_ujian[0]->user_ujian_details) ? $user_ujian[0]->user_ujian_details : null,
+                "user_ujian"=>!$flagNew ? $user_ujian[0] : $user_ujian,
+                "user_ujian_detail"=> !$flagNew ? $user_ujian[0]->user_ujian_details : $user_ujian->user_ujian_details,
                 "duration"=>$duration,
             ]);
         else{
@@ -178,7 +187,7 @@ class UserController extends Controller
             if(!is_null(request("jawaban".$pertanyaan->id))){
                 $user_ujian_detail = DB::table('user_ujian_details')->join('user_ujians','user_ujian_details.user_ujian_id','=','user_ujians.id')->where('user_ujians.user_id',auth()->id())->where('user_ujian_details.pertanyaan_id',$pertanyaan->id)->first();
                 if(!is_null($user_ujian_detail)){
-                    $user_ujian_detail = user_ujian_detail::find($user_ujian_detail->id);
+                    $user_ujian_detail = user_ujian_detail::wherePertanyaanId($user_ujian_detail->pertanyaan_id)->whereUserUjianId($user_ujian_detail->user_ujian_id)->first();
                     $user_ujian_detail->jawaban = request("jawaban".$pertanyaan->id);
                     $user_ujian_detail->save();
                 }else{
@@ -200,7 +209,7 @@ class UserController extends Controller
             if(!is_null(request("jawaban".$pertanyaan->id))){
                 $user_ujian_detail = DB::table('user_ujian_details')->join('user_ujians','user_ujian_details.user_ujian_id','=','user_ujians.id')->where('user_ujians.user_id',auth()->id())->where('user_ujian_details.pertanyaan_id',$pertanyaan->id)->first();
                 if(!is_null($user_ujian_detail)){
-                    $user_ujian_detail = user_ujian_detail::find($user_ujian_detail->id);
+                    $user_ujian_detail = user_ujian_detail::wherePertanyaanId($user_ujian_detail->pertanyaan_id)->whereUserUjianId($user_ujian_detail->user_ujian_id)->first();
                     $user_ujian_detail->jawaban = request("jawaban".$pertanyaan->id);
                     $user_ujian_detail->save();
                 }else{
