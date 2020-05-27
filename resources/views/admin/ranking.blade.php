@@ -77,6 +77,9 @@
     $( "#button_check" ).click(function(){
         if(!!choosenExam && !!choosenGroup){
             $("#table").empty();
+            choosenExam.dataUjian.sort(function (a, b) {
+                return  b.score-a.score; //dari gede ke kecil 
+            });
             let number = 1;
             choosenExam.dataUjian.forEach((data)=>{
                 const newRow = '<tr><td>'+number+'</td><td>'+data.name+'</td><td>'+data.group+'</td><td>'+data.created_at+'</td><td>'+data.score+'%</td><td>'+data.grade+'</td></tr>';

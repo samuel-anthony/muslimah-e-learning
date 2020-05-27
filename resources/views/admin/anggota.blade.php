@@ -57,7 +57,11 @@
                     </div>
                 </div>
 				
-                <div class="row mt-5 mr-1 justify-content-end">
+                <div class="row mt-5 mr-1 col-12 justify-content-between">
+                    <div>
+                        <input id="searchBox" placeholder="Masukkan pencarian">
+                        <button class="btn btn-success" id="searchButton">cari</button>
+                    </div>         
                     <select id='filterText' style='display:inline-block' onchange='filterText()' class="btn btn-primary">
                         <option disabled selected>Daftar Filter</option>
                         <option value='all'>All</option>
@@ -112,4 +116,20 @@
             </div>
         </div>
     </div>
+
+    
+<script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
+<script>
+    const users = @json($users);
+    $("#searchButton").click(function (){
+        const value = $("#searchBox").val();
+        
+        var rex = new RegExp(value);
+        $('.content').hide();
+        $('.content').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+        
+    });
+</script>
 @endsection
