@@ -47,6 +47,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/ujian','AdminController@ujian');  
     Route::get('/anggota','AdminController@anggota');
     Route::get('/group','AdminController@group');
+    Route::get('/ranking','AdminController@ranking');
     Route::get('/editUjian/{id}','AdminController@editUjian');
     Route::get('/editMateri/{id}','AdminController@editMateri');
     Route::get('/editMateri/{id}/{detailid}','AdminController@editMateriDetailPage');

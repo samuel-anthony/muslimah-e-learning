@@ -31,6 +31,7 @@
                 <a class="nav-item nav-link" href="/admin/ujian">Ujian</a>
                 <a class="nav-item nav-link" href="/admin/group">Grup</a>
                 <a class="nav-item nav-link" href="/admin/anggota">Anggota</a>
+                <a class="nav-item nav-link" href="/admin/ranking">Ranking</a>
             </div>
         </div>
         @else

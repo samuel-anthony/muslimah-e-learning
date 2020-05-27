@@ -9,6 +9,7 @@ use App\ujian;
 use App\pertanyaan;
 use App\materi;
 use App\materi_detail;
+use App\user_ujian;
 use Validator;
 use DateTime;
 class AdminController extends Controller
@@ -54,6 +55,50 @@ class AdminController extends Controller
                 //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
                 'groups'=>group::all()
             ]);
+        else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
+            return redirect('user');
+    }
+
+    public function ranking(){
+        if($this->isAdmin()){//klo admin larikan ke view di bawah
+            $ujians = ujian::all();
+            $groups = group::all();
+            $user_ujians = user_ujian::all();
+            foreach($groups as $group){
+                $listUjian = array();
+                $dataSiswa = array();
+                foreach($ujians as $ujian){
+                    $dataSiswa = array();
+                    foreach($user_ujians as $user){
+                        if($user->ujian_id == $ujian->id && $user->is_finished){
+                            $total_correct =0;
+                            $total_question =count($ujian->pertanyaans );
+                            foreach($user->user_ujian_details as $user_ujian_detail){
+                                foreach($ujian->pertanyaans as $pertanyaan){
+                                    if($pertanyaan->id == $user_ujian_detail->pertanyaan_id && $pertanyaan->jawaban_benar == $user_ujian_detail->jawaban){
+                                        $total_correct++;
+                                    }
+                                }
+                            }
+                            $user->name = $user->user->first_name.' '.$user->user->last_name;
+                            $user->group = $group->group_name;
+                            $user->score = $total_correct/$total_question*100.0;
+                            $user->grade = $this->getGrade($total_correct/$total_question*1.0);
+                            array_push($dataSiswa,$user);
+                        }
+                    }
+                    $ujian->dataUjian = $dataSiswa;
+                    if(date("Y-m-d")>=date("Y-m-d",strtotime($group->group_strt_dt." + ".($ujian->week - 1)." weeks"))){
+                        array_push($listUjian,$ujian);
+                    }
+                    
+                }
+                $group->ujian = $listUjian;
+            }
+            return view('admin.ranking',[
+                'groups'=>$groups
+            ]);
+        }
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
@@ -333,5 +378,25 @@ class AdminController extends Controller
         $materi_detail->delete();
         
         return redirect('/admin/editMateri/'.request("mstr_id"));
+    }
+
+    public function getGrade($floatNumber){
+        if($floatNumber==1){
+            return 'Mumtaz';
+        }
+        else if($floatNumber>=0.8){
+            return 'Jayyid Jiddan';
+        }
+        else if($floatNumber>0.65){
+            return 'Jayyid';
+        }
+        else if($floatNumber>0.5){
+            return 'Maqbul';
+        }
+        else if($floatNumber>0){
+            return 'Rasib';
+        }
+        return 'Ghayyib';
+        
     }
 }
