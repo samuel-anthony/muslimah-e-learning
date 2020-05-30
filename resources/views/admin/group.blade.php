@@ -52,6 +52,11 @@
                                             <td scope="col" width="50%">{{$group->group_name}}</td>
                                             <td scope="col" width="25%">{{$group->group_strt_dt}}</td>
                                             <td style="display: flex; justify-content: space-around;">
+                                                <form action="/admin/exportGroupData" method="POST">
+                                                    @csrf
+                                                    <input value="{{$group->id}}" name="id" style="display:none">
+                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">detail</button>
+                                                </form>
                                                 <form>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Hapus</button>
                                                 </form>
@@ -68,7 +73,47 @@
                         </table>
                     </div>
                 </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
+    
+    <script src="/assets/js/chartjs.min.js"></script>
+    <script>
+        const items = @json($groups);
+        var names = items.map(function(item) {
+            return item['group_name'];
+        });
+        var countgroupmember = items.map(function(item) {
+            return item['userMemberCount'];
+        });
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [
+                    {
+                        label: 'total group members',
+                        data: countgroupmember,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 @endsection

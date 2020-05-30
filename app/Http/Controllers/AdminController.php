@@ -50,13 +50,26 @@ class AdminController extends Controller
     }
 
     public function group(){
-        if($this->isAdmin())//klo admin larikan ke view di bawah
+        if($this->isAdmin()){//klo admin larikan ke view di bawah
+            $groups = group::all();
+            foreach($groups as $group){
+                $group->userMemberCount = count(User::whereGroupid($group->id)->get());
+            }
             return view('admin.group',[
                 //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
-                'groups'=>group::all()
+                'groups'=> $groups
             ]);
+        }
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
+    }
+
+    public function groupDetail(){
+        return view('admin.groupdetail',[
+            //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
+            'users'=>User::whereGroupid(request('id'))->get(),
+            'group'=>group::find(request('id'))
+        ]);
     }
 
     public function ranking(){
