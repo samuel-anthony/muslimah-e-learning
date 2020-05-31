@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function materi(){
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.materi',[
-                'materis' => materi::all()
+                'materis' => materi::orderBy('week')->get()
             ]);
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
@@ -43,7 +43,7 @@ class AdminController extends Controller
     public function ujian(){
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.ujian',[
-                'ujians' => ujian::all()
+                'ujians' => ujian::orderBy('week')->get()
             ]);
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
