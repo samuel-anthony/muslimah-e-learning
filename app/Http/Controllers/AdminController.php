@@ -386,6 +386,12 @@ class AdminController extends Controller
         return redirect('/admin/editMateri/'.$materi_detail->materi_id);
     }
 
+    public function deleteMateri(){
+        $materi = materi::find(request("id"));
+        $materi->delete();
+        
+        return redirect('/admin/materi');
+    }
     public function deleteMateriDetail(){
         $materi_detail = materi_detail::find(request("id"));
         $materi_detail->delete();

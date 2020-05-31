@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function (){
     Route::post('/submitEditPertanyaan','AdminController@submitEditPertanyaan');
     Route::post('/deletePertanyaan','AdminController@deletePertanyaan');
     Route::post('/materi','AdminController@tambahMateri');
+    Route::post('/deleteMateri','AdminController@deleteMateri');
     Route::post('/submitMateriDetail','AdminController@submitMateriDetail');
     Route::post('/deleteMateriDetail','AdminController@deleteMateriDetail');
     Route::post('/editMateriDetail','AdminController@editMateriDetail');
