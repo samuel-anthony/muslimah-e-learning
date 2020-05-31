@@ -76,7 +76,6 @@
                         <table class="table table-sm table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th scope="col" width="5%">No</th>
                                     <th scope="col" width="20%">Nama</th>
                                     <th scope="col" width="20%">Nomor Telepon</th>
                                     <th scope="col" width="20%">Email</th>
@@ -87,10 +86,8 @@
                             </thead>
                             <tbody>
                                 @if(count($users)>0)
-                                    @php($num = 1)
                                     @foreach($users as $user)
                                         <tr class="content">
-                                            <td scope="row" class="text-center">{{$num}}</td>
                                             <td>{{$user->first_name}}&nbsp;{{$user->last_name}}</td>
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->email}}</td>
@@ -102,7 +99,6 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        @php($num++)
                                     @endforeach
                                 @else
                                     <tr class="content">
