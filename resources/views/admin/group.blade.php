@@ -32,6 +32,12 @@
                     </div>
                 </div>
 		
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                
                 <div class="row mt-5">
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
@@ -74,11 +80,6 @@
                     </div>
                 </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-8">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                </div>
             </div>
         </div>
     </div>

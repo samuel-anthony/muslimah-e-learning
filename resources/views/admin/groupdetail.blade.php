@@ -11,11 +11,11 @@ header("Content-Disposition: attachment; filename=".$group->group_name.".xls");
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="20%">Nama</th>
-                                    <th scope="col" width="20%">Nomor Telepon</th>
+                                    <th scope="col" width="20%">Name</th>
+                                    <th scope="col" width="20%">Phone Number</th>
                                     <th scope="col" width="20%">Email</th>
-                                    <th scope="col" width="20%">Total Lulus Ujian</th>
-                                    <th scope="col" width="10%">Grup</th>
+                                    <th scope="col" width="20%">Passed Exam</th>
+                                    <th scope="col" width="10%">Group</th>
                                 </tr>
                             </thead>
                             <tbody>
