@@ -11,10 +11,10 @@ class MailController extends Controller
         $user = User::find($userID);
         $details = [
             'dear'=>'Assalamu\'alaikum ummu/ukhti '.$user->first_name.' '.$user->last_name,
-            'row1' => 'Berikut adalah password yang bisa digunakan untuk login',
+            'row1' => 'Here are the passwords that can be used to login to your account in Sahabat Muslimah',
 			'row2' => 'Password : '.$unEncriptedPassword,
 			'row3' => '',
-			'row4' => 'Terima Kasih',
+			'row4' => 'Thank You',
             //'image' => $project->media
         ];
 
