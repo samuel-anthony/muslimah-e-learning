@@ -177,6 +177,7 @@ class UserController extends Controller
         else
             return redirect('admin');
     }
+    
     public function profile(){
         if(!$this->isAdmin())
             return view('user.profile');

@@ -330,6 +330,13 @@ class AdminController extends Controller
     public function deleteAnggota(){
         $user = User::find(request('id'));
         $user->delete();
+        $user_ujians = user_ujian::whereUserId(request('id'))->get();
+        foreach($user_ujians as $user_ujian){
+            foreach($user_ujian->user_ujian_details as $user_ujian_detail){
+                $user_ujian_detail->delete();
+            }
+            $user_ujian->delete();
+        }
         return redirect('/admin/anggota');
     }
 
