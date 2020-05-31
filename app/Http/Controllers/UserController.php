@@ -29,8 +29,27 @@ class UserController extends Controller
             $ujians = [];
             if(date("Y-m-d")>=date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt)))
                 $ujians = ujian::where('week','<=',$currentWeek)->get();
+            $totalPassed = 0;
+            foreach($ujians as $ujian){
+                $user_ujian = user_ujian::whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                $total_correct_answer = 0;
+                foreach($ujian->pertanyaans as $pertanyaan){
+                    if(!is_null($user_ujian)){
+                        foreach($user_ujian->user_ujian_details as $jawaban){
+                            if($pertanyaan->id == $jawaban->pertanyaan_id){
+                                if($pertanyaan->jawaban_benar == $jawaban->jawaban){
+                                    $total_correct_answer++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                $totalPassed = (($total_correct_answer/count($ujian->pertanyaans)*1.00)>0.5) ? ($totalPassed+1): $totalPassed;
+            }
             return view('user.dashboard',[
-                'ujians'=>$ujians
+                'ujians'=>$ujians,
+                'totalPassed'=>$totalPassed
             ]);
         }
         else//user admin berusaha open url dari user, jangan bole.. redirect kembali ke /admin
