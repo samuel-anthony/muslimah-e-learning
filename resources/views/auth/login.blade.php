@@ -11,13 +11,13 @@
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Masukkan Email" name="email" required>
+                        <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-success px-5">Masuk</button>
+                    <button type="submit" class="btn btn-success px-5">Login</button>
                 </form>
                 <p class="text-right">Not Registered? <a href="contactus">Contact Us</a></p>
             </div>

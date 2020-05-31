@@ -48,9 +48,9 @@
                             </script>
 
                             <div class="form-group row" id="file_upload" @if($materi->type =="paragraph") style="display:none" @endif>
-                                <label for="file_upload" class="col-3">Choose file (TXT, PNG, 3GP)</label>
+                                <label for="file_upload" class="col-3">Choose file (TXT, PNG)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
+                                <input class="col-7" type="file" name="file" accept=".txt, .png, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form" @if($materi->type !="paragraph") style="display:none" @endif>
                                 <label for="paragraph" class="col-3">Paragraph</label>

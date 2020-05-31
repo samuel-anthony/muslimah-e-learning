@@ -8,6 +8,6 @@
     <p>{{ $details['row1'] }}</p>
     <p>{{ $details['row2'] }}</p>
     <p>{{ $details['row3'] }}</p>
-    <p>Terima Kasih</p>
+    <p>Thank You</p>
 </body>
 </html>

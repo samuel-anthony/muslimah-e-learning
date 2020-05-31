@@ -240,7 +240,7 @@ class AdminController extends Controller
             'group_name' => 'required|unique:groups',
             'group_strt_dt' => 'required',   
         ],[
-            'group_name.unique' => 'nama grup sudah digunakan, mohon pakai nama grup lain'
+            'group_name.unique' => 'Duplicate Group Name, please use other unique name'
         ]);
         if ($validator->fails()) {
             $validator->validate();
@@ -337,6 +337,7 @@ class AdminController extends Controller
         $validator = Validator::make(request()->input(), [
             'week' => 'unique:materis|gt:0',
         ],[
+            'week.unique' => 'The week already has learning material'
         ]);
         if ($validator->fails()) {
             $validator->validate();

@@ -18,7 +18,12 @@
                             <div class="form-group row">
                                 <label for="judul" class="col-2 inputRequired">Week*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" placeholder="Enter week when the material will be posted" name="week" required>
+                                <input type="number" class="form-control col-7  @error('week') is-invalid @enderror" placeholder="Enter week when the material will be posted" name="week" required>
+                                @error('week')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             
                             <div class="row justify-content-center">

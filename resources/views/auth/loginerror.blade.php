@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control is-invalid" id="email" placeholder="Masukkan Email" name="email" required>
+                        <input type="text" class="form-control is-invalid" id="email" placeholder="Enter Email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -20,7 +20,7 @@
                             <strong>{{$error_message}}</strong>
                         </span>
                     </div>
-                    <button type="submit" class="btn btn-success">Masuk</button>
+                    <button type="submit" class="btn btn-success">Login</button>
                 </form>
                 <p class="text-right">Not Registered? <a href="">Contact Us</a></p>
             </div>

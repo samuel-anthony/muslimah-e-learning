@@ -21,9 +21,9 @@
                             <input style="display:none" name="materi_id" value="{{$materi->id}}">
                             
                             <div class="form-group row" id="file_upload" style="display:none">
-                                <label for="file_upload" class="col-3">Choose file (TXT, PNG, 3GP)</label>
+                                <label for="file_upload" class="col-3">Choose file (TXT, PNG)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
+                                <input class="col-7" type="file" name="file" accept=".txt, .png, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form">
                                 <label for="paragraph" class="col-3">Paragraph</label>

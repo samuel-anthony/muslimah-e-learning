@@ -119,8 +119,12 @@
     const users = @json($users);
     $("#searchButton").click(function (){
         const value = $("#searchBox").val();
-        
-        var rex = new RegExp(value);
+        const res = value.split(" ");
+        let newVal = ".*";
+        res.forEach((data)=>{
+            newVal = newVal + data + ".*"
+        });
+        var rex = new RegExp(newVal);
         $('.content').hide();
         $('.content').filter(function() {
             return rex.test($(this).text());
