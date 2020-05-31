@@ -32,17 +32,10 @@ class CustomLoginController extends Controller
                 'email'=>request('email'),
                 'password'=>request('password')
             ])){
-                if($user[0]->isInactive == 0){//user nya masi aktif
-                    if($user[0]->isAdmin == 0)//user biasa bukan admin
-                        return redirect('/user');
-                    else
-                        return redirect('/admin');
-                }
+                if($user[0]->isAdmin == 0)//user biasa bukan admin
+                    return redirect('/user');
                 else
-                    return view('auth.loginerror',[
-                        'user_name' => request('email'),
-                        'error_message' => 'User is Inactive'
-                    ]);
+                    return redirect('/admin');
             }
             else{
                 return view('auth.loginerror',[
