@@ -7,9 +7,9 @@
                 <h2 class="mb-5">{{$materi->materi->title}}</h2>
                 
                 <div class="card mb-5">
-                    <h5 class="card-header">Materi Original</h5>
+                    <h5 class="card-header">Original Material</h5>
                     @if($materi->type == "paragraph")        
-                        <p class="card-text ml-4">{{$materi->value}}</p>
+                        <p class="card-text ml-4">{!! nl2br($materi->value) !!}</p>
                     @elseif($materi->type == "image/png")
                         <div class="row justify-content-center">
                             <img src="data:image/png;base64,{{$materi->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
@@ -20,15 +20,15 @@
                 </div>
 
                 <div class="card">
-                    <h5 class="card-header">Materi Edit</h5>
+                    <h5 class="card-header">New Material</h5>
                     <div class="col-12 my-5">
                         <form action="/admin/editMateriDetail" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="file_upload" class="col-3">Pilih jenis materi baru</label>
+                                <label for="file_upload" class="col-3">Select Material Type</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <select class="form-control col-7" id="materi_type" name="materi_type" required>
-                                    <option value="file_upload" @if($materi->type !="paragraph") selected @endif>Unggah file</option>
+                                    <option value="file_upload" @if($materi->type !="paragraph") selected @endif>File Upload</option>
                                     <option value="biasa" @if($materi->type =="paragraph") selected @endif>Manual</option>
                                 </select>
                             </div>
@@ -48,18 +48,18 @@
                             </script>
 
                             <div class="form-group row" id="file_upload" @if($materi->type =="paragraph") style="display:none" @endif>
-                                <label for="file_upload" class="col-3">Pilih file (TXT, PNG, 3GP)</label>
+                                <label for="file_upload" class="col-3">Choose file (TXT, PNG, 3GP)</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form" @if($materi->type !="paragraph") style="display:none" @endif>
-                                <label for="paragraph" class="col-3">Paragrap</label>
+                                <label for="paragraph" class="col-3">Paragraph</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <textarea class="form-control col-7" name="paragraph" rows="5"name="txt">@if($materi->type =="paragraph"){{$materi->value}}@endif</textarea>
                             </div>
                             
                             <div class="row justify-content-center">
-                                <button id="btnSubmit" type="submit" class="btn btn-success">Kirim</button>
+                                <button id="btnSubmit" type="submit" class="btn btn-success">Post</button>
 							</div>
                         </form>
                     </div>

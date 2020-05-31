@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-8 bg-light rounded py-4 px-5">
-                <h2>Hubungi Kami</h2>
+                <h2>Contact Us</h2>
                 <div class="row my-4">
                     <div class="col-4">
                         <a href="">

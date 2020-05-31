@@ -78,7 +78,7 @@ class UserController extends Controller
         $user_ujian = user_ujian::whereUjianId(request('ujian_id'))->first();
         $total_correct_answer = 0;
         foreach($ujian->pertanyaans as $pertanyaan){
-            $pertanyaan->jawaban_user = "tidak menjawab";
+            $pertanyaan->jawaban_user = "No Answer";
             switch($pertanyaan->jawaban_benar){
                 case '1':
                     $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_a;

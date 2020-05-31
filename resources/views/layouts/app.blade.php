@@ -27,32 +27,32 @@
         @if(Auth::user()->isAdmin == 1)
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/admin/materi">Materi</a>
-                <a class="nav-item nav-link" href="/admin/ujian">Ujian</a>
-                <a class="nav-item nav-link" href="/admin/group">Grup</a>
-                <a class="nav-item nav-link" href="/admin/anggota">Anggota</a>
+                <a class="nav-item nav-link" href="/admin/materi">Material</a>
+                <a class="nav-item nav-link" href="/admin/ujian">Exam</a>
+                <a class="nav-item nav-link" href="/admin/group">Group</a>
+                <a class="nav-item nav-link" href="/admin/anggota">Members</a>
                 <a class="nav-item nav-link" href="/admin/ranking">Ranking</a>
             </div>
         </div>
         @else
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/user/materi">Materi</a>
-                <a class="nav-item nav-link" href="/user/ujian">Ujian</a>
+                <a class="nav-item nav-link" href="/user/materi">Material</a>
+                <a class="nav-item nav-link" href="/user/ujian">Exam</a>
             </div>
         </div>
         @endif
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Pengaturan
+                Settings
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @if(Auth::user()->isAdmin==0)
-                <a class="dropdown-item" href="/user/profile">Profil</a>
+                <a class="dropdown-item" href="/user/profile">Profile</a>
                 @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Keluar') }}</a>
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
             </div>
         </div>

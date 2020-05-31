@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Materi</h2>
+                <h2>Material</h2>
                 
 
                 <div class="row mt-5">
@@ -13,15 +13,15 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="50%">Judul</th>
-                                    <th scope="col" width="30%">Minggu ke</th>
+                                    <th scope="col" width="50%">Material Title</th>
+                                    <th scope="col" width="30%">Week</th>
                                     <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(is_null($materis ?? null) || count($materis) <= 0)
                                 <tr>
-                                    <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                    <td colspan="5" class="text-center">Data not Found</td>
                                 </tr>
                                 @else
                                     @php($num=1)
@@ -32,7 +32,7 @@
                                             <td>{{$materi->week}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form  class="submitForm" action="/user/openMateri/{{$materi->id}}" method="GET">
-                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Buka</button>
+                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Open</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -34,7 +34,7 @@ header("Content-Disposition: attachment; filename=".$group->group_name.".xls");
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                        <td colspan="5" class="text-center">Data not Found</td>
                                     </tr>
                                 @endif
                             </tbody>

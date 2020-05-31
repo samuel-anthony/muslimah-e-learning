@@ -11,28 +11,28 @@
                         <form action="/admin/submitMateriDetail" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="file_upload" class="col-3">Pilih jenis materi baru</label>
+                                <label for="file_upload" class="col-3">Select Material Type</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <select class="form-control col-7" id="materi_type" name="materi_type" required>
                                     <option value="biasa" selected>Manual</option>
-                                    <option value="file_upload">Unggah File</option>
+                                    <option value="file_upload">File Upload</option>
                                 </select>
                             </div>
                             <input style="display:none" name="materi_id" value="{{$materi->id}}">
                             
                             <div class="form-group row" id="file_upload" style="display:none">
-                                <label for="file_upload" class="col-3">Pilih file (TXT, PNG, 3GP)</label>
+                                <label for="file_upload" class="col-3">Choose file (TXT, PNG, 3GP)</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <input class="col-7" type="file" name="file" accept=".txt, .png, .3gp, .pdf">
                             </div>
                             <div class="form-group row" id="submit_form">
-                                <label for="paragraph" class="col-3">Paragraf</label>
+                                <label for="paragraph" class="col-3">Paragraph</label>
                                 <label class="col-1 col-form-label">:</label>
                                 <textarea class="form-control col-7" name="paragraph" rows="5"name="txt"></textarea>
                             </div>
                             
                             <div class="row justify-content-center">
-                                <button id="btnSubmit" type="submit" class="btn btn-success">Kirim</button>
+                                <button id="btnSubmit" type="submit" class="btn btn-success">Post</button>
 							</div>
                         </form>
                     </div>
@@ -42,20 +42,20 @@
         @if(count($materi->materi_details)==0)
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Pratinjau</h2>
+                <h2>Preview</h2>
                 <div class="preview">
-                    <p>Tidak ada detail saat ini dipilih untuk ditampilkan</p>
-                    <p>Mohon unggah atau kirim materi untuk bisa ditampilkan</p>
+                    <p>No Detail Display</p>
+                    <p>Please Upload a Material to be Displayed</p>
                 </div>
             </div>
         </div>
         @else
         <div class="row mt-3 justify-content-center show">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Pratinjau</h2>
+                <h2>Preview</h2>
                 <br>
                 <div class="row justify-content-end mr-1 mb-3">
-                    <button id="show" class="btn btn-primary">Tampilkan Garis dan Tombol</button>
+                    <button id="show" class="btn btn-primary">Hide Line and Button</button>
                 </div>
                 <div class="preview">
                     @foreach($materi->materi_details as $detail)
@@ -63,8 +63,8 @@
                             <div class="card">
                                 <h5 class="card-header"></h5>
                                 <div class="card-body">
-                                    @if($detail->type == "paragraph")        
-                                        <p class="card-text">{{$detail->value}}</p>
+                                    @if($detail->type == "paragraph")            
+                                        {!! nl2br($detail->value) !!}
                                     @elseif($detail->type == "image/png")
                                         <div class="row justify-content-center">
                                             <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px" alt="">
@@ -74,12 +74,12 @@
                                     @endif
                                     <div class="row justify-content-center mb-3">
                                         <form action="/admin/editMateri/{{$detail->materi_id}}/{{$detail->id}}" method="GET">
-                                            <button type="submit" class="btn btn-primary mr-3">Ubah</button>
+                                            <button type="submit" class="btn btn-primary mr-3">Edit</button>
                                         </form>
                                         <form action="/admin/deleteMateriDetail" method="post">@csrf
                                             <input style="display:none" name="id" value="{{$detail->id}}">
                                             <input style="display:none" name="mstr_id" value="{{$detail->materi_id}}">
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -92,17 +92,17 @@
         
         <div class="row mt-3 justify-content-center hide">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Pratinjau</h2>
+                <h2>Preview</h2>
                 <br>
                 <div class="row justify-content-end mr-1 mb-3">
-                    <button id="hide" class="btn btn-primary">Tampilkan Garis dan Tombol</button>
+                    <button id="hide" class="btn btn-primary">Show Line and Button</button>
                 </div>
                 <div class="preview ">
                     @foreach($materi->materi_details as $detail)
                         <div class="card mb-5">
                             <h5 class="card-header"></h5>
                             @if($detail->type == "paragraph")        
-                                <p class="card-text">{{$detail->value}}</p>
+                                {!! nl2br($detail->value) !!}
                             @elseif($detail->type == "image/png")
                                 <div class="row justify-content-center">
                                     <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">

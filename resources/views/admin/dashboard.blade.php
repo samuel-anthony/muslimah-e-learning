@@ -9,7 +9,7 @@
                         <a href="/admin/materi">
                             <div class="mx-2">
                                 <img src="/assets/img/materi.png" width="100" height="100" class="d-inline-block align-top my-4" alt="">
-                                <h4>Materi</h4>
+                                <h4>Material</h4>
                             </div>
                         </a>
                     </div>
@@ -17,7 +17,7 @@
                         <a href="/admin/ujian">
                             <div class="mx-2">
                                 <img src="/assets/img/ujian.png" width="100" height="100" class="d-inline-block align-top my-4" alt="">
-                                <h4>Ujian</h4>
+                                <h4>Exam</h4>
                             </div>
                         </a>
                     </div>
@@ -25,7 +25,7 @@
                         <a href="/admin/group">
                             <div class="mx-2">
                                 <img src="/assets/img/grup.png" width="100" height="100" class="d-inline-block align-top my-4" alt="">
-                                <h4>Grup</h4>
+                                <h4>Group</h4>
                             </div>
                         </a>
                     </div>
@@ -33,7 +33,7 @@
                         <a href="/admin/anggota">
                             <div class="mx-2">
                                 <img src="/assets/img/user.png" width="100" height="100" class="d-inline-block align-top my-4" alt="">
-                                <h4>Anggota</h4>
+                                <h4>Members</h4>
                             </div>
                         </a>
                     </div>

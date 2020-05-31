@@ -4,25 +4,25 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Materi</h2>
+                <h2>Learning Material</h2>
                 
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/admin/materi" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="judul" class="col-2 inputRequired">Judul Materi*</label>
+                                <label for="judul" class="col-2 inputRequired">Title*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7"  placeholder="Masukkan Judul Materi" name="title" required>
+                                <input type="text" class="form-control col-7"  placeholder="Enter Title of the Material" name="title" required>
                             </div>
                             <div class="form-group row">
-                                <label for="judul" class="col-2 inputRequired">Minggu ke*</label>
+                                <label for="judul" class="col-2 inputRequired">Week*</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" placeholder="Masukkan Minggu keberapa materi ini di pos" name="week" required>
+                                <input type="number" class="form-control col-7" placeholder="Enter week when the material will be posted" name="week" required>
                             </div>
                             
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-success">Tambah Materi</button>
+                                <button type="submit" class="btn btn-success">Add Material</button>
 							</div>
                         </form>
                     </div>
@@ -34,15 +34,15 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="50%">Judul</th>
-                                    <th scope="col" width="30%">Minggu ke</th>
+                                    <th scope="col" width="50%">Title</th>
+                                    <th scope="col" width="30%">Week</th>
                                     <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(is_null($materis ?? null) || count($materis) <= 0)
                                 <tr>
-                                    <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                    <td colspan="5" class="text-center">Data not Found</td>
                                 </tr>
                                 @else
                                     @php($num=1)

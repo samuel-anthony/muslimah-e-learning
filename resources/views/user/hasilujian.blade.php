@@ -9,12 +9,12 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="form-group row">
-                            <label for="judul" class="col-3 inputRequired">Nilai Ujian</label>
+                            <label for="judul" class="col-3 inputRequired">Score</label>
                             <div class="col-1">:</div>
                             <label for="judul" class="col-3">{{$ujian->score*100}}%</label>
                         </div>
                         <div class="form-group row">
-                            <label for="judul" class="col-3 inputRequired">Hasil Ujian</label>
+                            <label for="judul" class="col-3 inputRequired">Exam Grade</label>
                             <div class="col-1">:</div>
                             <label for="judul" class="col-3">{{$ujian->grade}}</label>
                         </div>
@@ -27,9 +27,9 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Soal</th>
-                                    <th scope="col" width="20%">jawaban benar</th>
-                                    <th scope="col" width="20%">jawaban user</th>
+                                    <th scope="col" width="55%">Question</th>
+                                    <th scope="col" width="20%">Correct Answer</th>
+                                    <th scope="col" width="20%">Your Answer</th>
                                 </tr>
                             </thead>
                             <tbody>

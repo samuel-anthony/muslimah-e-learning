@@ -4,16 +4,16 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>Grup</h2>
+                <h2>Group</h2>
                 
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/admin/group" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="judul" class="col-3 inputRequired">Nama Grup*</label>
+                                <label for="judul" class="col-3 inputRequired">Group Name*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7 @error('group_name') is-invalid @enderror" id="judul" placeholder="Masukkan Nama Group" name="group_name" required  value="{{old('group_name')}}">
+                                <input type="text" class="form-control col-7 @error('group_name') is-invalid @enderror" id="judul" placeholder="Enter Group Name" name="group_name" required  value="{{old('group_name')}}">
                                 @error('group_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -21,12 +21,12 @@
                                 @enderror
                             </div>
                             <div class="form-group row">
-                                <label for="judul" class="col-3 inputRequired">Group Mulai*</label>
+                                <label for="judul" class="col-3 inputRequired">Group Start Date*</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Masukkan Hari Mulai Group (Y-m-d)" name="group_strt_dt" required  value="{{old('group_strt_dt')}}">
+                                <input type="text" class="form-control col-7" id="datepicker" placeholder="Enter Date (Y-m-d)" name="group_strt_dt" required  value="{{old('group_strt_dt')}}">
                             </div>
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-success">Tambah Grup</button>
+                                <button type="submit" class="btn btn-success">Add Grup</button>
 							</div>
                         </form>
                     </div>
@@ -38,9 +38,9 @@
                             <thead>
                                 <tr class="text-center">
                                     <th scope="col" width="5%">No</th>
-                                    <th scope="col" width="55%">Nama Grup</th>
-                                    <th scope="col" width="20%">Hari Grup Mulai</th>
-                                    <th scope="col" width="20%">Aksi</th>
+                                    <th scope="col" width="55%">Group Name</th>
+                                    <th scope="col" width="20%">Starting Date</th>
+                                    <th scope="col" width="20%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,10 +55,10 @@
                                                 <form action="/admin/exportGroupData" method="POST">
                                                     @csrf
                                                     <input value="{{$group->id}}" name="id" style="display:none">
-                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">detail</button>
+                                                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Detail</button>
                                                 </form>
                                                 <form>
-                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Hapus</button>
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -66,7 +66,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                        <td colspan="5" class="text-center">Data not Found</td>
                                     </tr>
                                 @endif
                             </tbody>

@@ -10,7 +10,7 @@
                         <a href="/user/materi">
                             <div class="mx-3">
                                 <img src="/assets/img/materi.png" width="150" height="150" class="d-inline-block align-top my-4" alt="">
-                                <h4>Materi</h4>
+                                <h4>Material</h4>
                             </div>
                         </a>
                     </div>
@@ -18,7 +18,7 @@
                         <a href="/user/ujian">
                             <div class="mx-3">
                                 <img src="/assets/img/ujian.png" width="150" height="150" class="d-inline-block align-top my-4" alt="">
-                                <h4>Ujian</h4>
+                                <h4>Exam</h4>
                             </div>
                         </a>
                     </div>
@@ -26,7 +26,7 @@
                         <a href="/user/profile">
                             <div class="mx-3">
                                 <img src="/assets/img/user.png" width="150" height="150" class="d-inline-block align-top my-4" alt="">
-                                <h4>Profil</h4>
+                                <h4>Profile</h4>
                             </div>
                         </a>
                     </div>
