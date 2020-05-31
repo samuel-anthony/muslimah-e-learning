@@ -18,7 +18,7 @@
                                         <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">
                                     </div>
                                 @elseif($detail->type == "application/pdf")
-                                    <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe?>
+                                    <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
                                 @endif
                             @endforeach
                         </div>
