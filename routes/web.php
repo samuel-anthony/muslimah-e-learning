@@ -39,6 +39,7 @@ Route::prefix('user')->group(function (){
     Route::post('/ujian','UserController@ujianStart');  
     Route::post('/saveAnswer','UserController@saveAnswer');  
     Route::post('/submitAnswer','UserController@submitAnswer');  
+    Route::post('/hasilUjian','UserController@hasilUjian');
 });
 
 Route::prefix('admin')->group(function (){    

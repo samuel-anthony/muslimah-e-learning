@@ -57,6 +57,13 @@
                             <button type="submit" class="btn btn-primary">Mulai</button>
                         </div>
                     </form>
+                    <form action="/user/hasilUjian" method="post">
+                        @csrf
+                        <input style="display:none" name="ujian_id" id="hasil_ujian_id">
+                        <div class="card-footer text-center" id="button_hasil">
+                            <button type="submit" class="btn btn-primary">Hasil</button>
+                        </div>
+                    </form>
                 </div>
                 
                 <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
@@ -70,10 +77,17 @@
                                 $("#detail_durasi").html(data[index].exam_duration) ;
                                 $("#detail_waktu").html(data[index].end_date);
                                 $("#ujian_id").val(data[index].id);
-                                $("#button_mulai").show();
+                                $("#hasil_ujian_id").val(data[index].id);
+                                $("#button_mulai").hide();
+                                $("#button_hasil").hide();
                                 if(data[index].expired){
                                     $("#button_mulai").hide();
-                                    $("#detail_hasil").html(data[index].total_correct+'/'+data[index].pertanyaans.length);
+                                    $("#button_hasil").show();
+                                    $("#detail_hasil").html(data[index].total_correct+'/'+data[index].total_questions);
+                                }
+                                else{
+                                    $("#button_hasil").hide();
+                                    $("#button_mulai").show();
                                 }
                                 console.log(data[index].total_correct);
                                 return false;

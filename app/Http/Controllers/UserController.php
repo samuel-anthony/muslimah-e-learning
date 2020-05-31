@@ -54,6 +54,57 @@ class UserController extends Controller
         else
             return redirect('admin');
     }
+    public function hasilUjian(){
+        $ujian = ujian::find(request('ujian_id'));
+        $user_ujian = user_ujian::whereUjianId(request('ujian_id'))->first();
+        $total_correct_answer = 0;
+        foreach($ujian->pertanyaans as $pertanyaan){
+            $pertanyaan->jawaban_user = "tidak menjawab";
+            switch($pertanyaan->jawaban_benar){
+                case '1':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_a;
+                    break;
+                case '2':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_b;
+                    break;
+                case '3':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_c;
+                    break;
+                case '4':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_d;
+                    break;
+                default:
+                    break;
+            }
+            foreach($user_ujian->user_ujian_details as $jawaban){
+                if($pertanyaan->id == $jawaban->pertanyaan_id){
+                    switch($jawaban->jawaban){
+                        case '1':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_a;
+                            break;
+                        case '2':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_b;
+                            break;
+                        case '3':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_c;
+                            break;
+                        case '4':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_d;
+                            break;
+                        default:
+                            break;
+                    }
+                    if($pertanyaan->jawaban_benar == $jawaban->jawaban){
+                        $total_correct_answer++;
+                        break;
+                    }
+                }
+            }
+        }
+        $ujian->score = $total_correct_answer/count($ujian->pertanyaans)*1.00;
+        $ujian->grade = $this->getGrade($ujian->score);
+        return view('user.hasilujian',['ujian'=>$ujian]);
+    }
     public function ujian(){
         if(!$this->isAdmin()){
             $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
@@ -78,15 +129,25 @@ class UserController extends Controller
                     }
                 }
                 $ujian->total_correct = 0;
+                $ujian->total_questions = count($ujian->pertanyaans);
                 if($ujian->expired){
-                    foreach($user_ujian->user_ujian_details as $detil){
-                        foreach($ujian->pertanyaans as $pertanyaan){
-                            if($detil->pertanyaan_id == $pertanyaan->id && $detil->jawaban == $pertanyaan->jawaban_benar){
-                                $ujian->total_correct++;
-                                break;
+                    if(!is_null($user_ujian)){
+                        foreach($user_ujian->user_ujian_details as $detil){
+                            foreach($ujian->pertanyaans as $pertanyaan){
+                                if($detil->pertanyaan_id == $pertanyaan->id && $detil->jawaban == $pertanyaan->jawaban_benar){
+                                    $ujian->total_correct++;
+                                    break;
+                                }
                             }
                         }
                     }
+                    else{
+                        $user_ujian = new user_ujian;
+                        $user_ujian->ujian_id = $ujian->id;
+                        $user_ujian->user_id = \Auth::user()->id;
+                    }
+                    $user_ujian->is_finished = 1;
+                    $user_ujian->save();
                 }
                 
             }
@@ -231,5 +292,26 @@ class UserController extends Controller
         $user_ujian->is_finished = true;
         $user_ujian->save();
         return redirect("/user/ujian");
+    }
+
+    
+    public function getGrade($floatNumber){
+        if($floatNumber==1){
+            return 'Mumtaz';
+        }
+        else if($floatNumber>=0.8){
+            return 'Jayyid Jiddan';
+        }
+        else if($floatNumber>0.65){
+            return 'Jayyid';
+        }
+        else if($floatNumber>0.5){
+            return 'Maqbul';
+        }
+        else if($floatNumber>0){
+            return 'Rasib';
+        }
+        return 'Ghayyib';
+        
     }
 }
