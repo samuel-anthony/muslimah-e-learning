@@ -213,7 +213,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : '',
         ],[
-            'email.unique' => 'duplicate email, please use another email',
+            'email.unique' => 'Duplicate Email, please use another email',
             'phone.regex' => 'Wrong Phone Format, please use the proper phone number'
         ]);
         if ($validator->fails()) {
