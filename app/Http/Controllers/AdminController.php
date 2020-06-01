@@ -383,7 +383,7 @@ class AdminController extends Controller
         }
         else{
             $validator = Validator::make(request()->file(), [
-                'file' => 'required|max:50000',//50MB
+                'file' => 'required|max:100000',//100MB
             ],[
             ]);
         }

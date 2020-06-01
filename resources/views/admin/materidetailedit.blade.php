@@ -17,7 +17,7 @@
                     @elseif($materi->type == "application/pdf")
                         <iframe src="data:application/pdf;base64,{{$materi->value}}" height="500" width="100%"></iframe> 
                     @elseif($materi->type == "video/mp4")
-                        <video autoplay controls width="100%" height="300">
+                        <video controls width="100%" height="300">
                             <source src="data:video/mp4;base64,{{$materi->value}}" />
                         </video>
                     @endif
