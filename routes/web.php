@@ -24,6 +24,8 @@ Auth::routes();
 
 Route::post('/login','CustomLoginController@login');
 Route::get('/sendEmailRegister/{id}/{pass}', 'mailController@mailsendregister');
+Route::get('/sendEmailChangePassword/{userId}/{oldPass}/{newPass}', 'mailController@mailsendChangePassword');
+Route::get('/sendEmailChangeEmail/{oldEmail}/{newEmail}', 'mailController@mailsendChangeEmail');
 
 
 Route::prefix('user')->group(function (){    
@@ -67,6 +69,7 @@ Route::prefix('admin')->group(function (){
     Route::post('/deletePertanyaan','AdminController@deletePertanyaan');
     Route::post('/materi','AdminController@tambahMateri');
     Route::post('/deleteMateri','AdminController@deleteMateri');
+    Route::post('/deleteGroup','AdminController@deleteGroup');
     Route::post('/submitMateriDetail','AdminController@submitMateriDetail');
     Route::post('/deleteMateriDetail','AdminController@deleteMateriDetail');
     Route::post('/editMateriDetail','AdminController@editMateriDetail');

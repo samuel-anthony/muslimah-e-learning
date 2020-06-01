@@ -21,9 +21,14 @@
                             <input style="display:none" name="materi_id" value="{{$materi->id}}">
                             
                             <div class="form-group row" id="file_upload" style="display:none">
-                                <label for="file_upload" class="col-3">Choose file (TXT, PNG)</label>
+                                <label for="file_upload" class="col-3">Choose file (PDF, PNG, MP4)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .pdf">
+                                <input class="col-7 @error('file') is-invalid @enderror" type="file" name="file" accept=".png, .pdf, .mp4">
+                                @error('file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group row" id="submit_form">
                                 <label for="paragraph" class="col-3">Paragraph</label>
@@ -71,6 +76,10 @@
                                         </div>
                                     @elseif($detail->type == "application/pdf")
                                         <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
+                                    @elseif($detail->type == "video/mp4")
+                                        <video autoplay controls width="100%" height="300">
+                                            <source src="data:video/mp4;base64,{{$detail->value}}" />
+                                        </video>
                                     @endif
                                     <div class="row justify-content-center mb-3">
                                         <form action="/admin/editMateri/{{$detail->materi_id}}/{{$detail->id}}" method="GET">
@@ -109,6 +118,10 @@
                                 </div>
                             @elseif($detail->type == "application/pdf")
                                 <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
+                            @elseif($detail->type == "video/mp4")
+                                <video autoplay controls width="100%" height="300">
+                                    <source src="data:video/mp4;base64,{{$detail->value}}" />
+                                </video>
                             @endif
                         </div>
                     @endforeach

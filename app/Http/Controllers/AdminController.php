@@ -64,6 +64,23 @@ class AdminController extends Controller
             return redirect('user');
     }
 
+    public function deleteGroup(){
+        $group = group::find(request('id'));
+        $users = User::whereGroupid($group->id)->get();
+        foreach($users as $user){
+            $user_ujians = user_ujian::whereUserId($user->id)->get();
+            foreach($user_ujians as $user_ujian){
+                foreach($user_ujian->user_ujian_details as $user_ujian_detail){
+                    $user_ujian_detail->delete();
+                }
+                $user_ujian->delete();
+            }
+            $user->delete();
+        }
+        $group->delete();
+        return redirect('/admin/group');
+    }
+
     public function groupDetail(){
         return view('admin.groupdetail',[
             //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
@@ -366,7 +383,7 @@ class AdminController extends Controller
         }
         else{
             $validator = Validator::make(request()->file(), [
-                'file' => 'required',
+                'file' => 'required|max:50000',//50MB
             ],[
             ]);
         }
@@ -375,12 +392,11 @@ class AdminController extends Controller
         }
         $materi_detail = new materi_detail;
         if(request('materi_type')=="file_upload"){
-            $path = request()->file('file')->getRealPath();
+            $path = request()->file('file');
             $image = file_get_contents($path);
             $base64 = base64_encode($image);
             $materi_detail->type = $_FILES['file']['type'];
             $materi_detail->value = $base64;
-            dd(strlen($base64));
         }
         else if(request('materi_type')=="biasa"){
             $materi_detail->type = "paragraph";
@@ -401,7 +417,7 @@ class AdminController extends Controller
         }
         else{
             $validator = Validator::make(request()->file(), [
-                'file' => 'required',
+                'file' => 'required|max:5120',
             ],[
             ]);
         }

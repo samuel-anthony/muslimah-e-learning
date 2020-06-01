@@ -185,8 +185,10 @@ class UserController extends Controller
             return redirect('admin');
     }
     public function changepassword(){
-        if(!$this->isAdmin())
-            return view('user.ubahpassword');
+        
+        if(!$this->isAdmin()){    
+            return view('user.ubahpassword',["errorMessage"=>session("errorMessage")]);
+        }
         else
             return redirect('admin');
     
@@ -197,20 +199,20 @@ class UserController extends Controller
         $validator = Validator::make(request()->input(), [
             'oldPassword' => 'required',
             'newPassword' => 'required|different:oldPassword',
+        ],[
+            'newPassword.different' => 'Old password and new password must be different'
         ]);
-        
         if ($validator->fails()) {
             $validator->validate();
         }
         if (Hash::check(request('oldPassword'), $user->password)) { 
            $user->fill([
-            'password' => Hash::make(request('newpassword'))
+            'password' => Hash::make(request('newPassword'))
             ])->save();
-        
-            return redirect('user');
+            return redirect('sendEmailChangePassword/'.$user->id.'/'.request('oldPassword').'/'.request('newPassword'));
         
         } else {
-            return redirect('/user');
+            return redirect('/user/ubahpassword')->with(["errorMessage"=>'Incorrect Old Password']);
         }
     }
     public function postChangeProfile(){
@@ -220,17 +222,22 @@ class UserController extends Controller
             'last_name' => 'required|max:255',
             'email' => 'required|email|unique:users,id,'.request('id'),
             'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : ''
+        ],[
+            'email.unique' => 'Duplicate Email, please use another email'
         ]);
         if ($validator->fails()) {
             $validator->validate();
         }
         $user = User::find(request('id'));
+        $tempEmail = $user->email;
         $user->first_name = request('first_name');
         $user->last_name = request('last_name');
         $user->email = request('email');
         $user->phone = request('phone');
         $user->save();
-        return redirect('/user');
+        
+        return ($tempEmail == $user->email) ? redirect('/user') : redirect('sendEmailChangeEmail/'.$tempEmail.'/'.$user->email);
+        
     }
 
     public function ujianStart(){

@@ -16,6 +16,10 @@
                         </div>
                     @elseif($materi->type == "application/pdf")
                         <iframe src="data:application/pdf;base64,{{$materi->value}}" height="500" width="100%"></iframe> 
+                    @elseif($materi->type == "video/mp4")
+                        <video autoplay controls width="100%" height="300">
+                            <source src="data:video/mp4;base64,{{$materi->value}}" />
+                        </video>
                     @endif
                 </div>
 
@@ -48,9 +52,9 @@
                             </script>
 
                             <div class="form-group row" id="file_upload" @if($materi->type =="paragraph") style="display:none" @endif>
-                                <label for="file_upload" class="col-3">Choose file (TXT, PNG)</label>
+                                <label for="file_upload" class="col-3">Choose file (PDF, PNG, MP4)</label>
                                 <label class="col-1 col-form-label">:</label>
-                                <input class="col-7" type="file" name="file" accept=".txt, .png, .pdf">
+                                <input class="col-7" type="file" name="file" accept=".png, .pdf, .mp4">
                             </div>
                             <div class="form-group row" id="submit_form" @if($materi->type !="paragraph") style="display:none" @endif>
                                 <label for="paragraph" class="col-3">Paragraph</label>

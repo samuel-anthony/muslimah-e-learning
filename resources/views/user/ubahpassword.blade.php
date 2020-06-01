@@ -13,7 +13,12 @@
                             <div class="form-group row">
                                 <label for="oldPassword" class="col-3 inputRequired">Old Password*</label>
                                 <div class="col-1">:</div>
-                                <input type="password" class="form-control col-7" id="oldPassword" placeholder="Enter Old Password" name="oldPassword" minlength="6" maxlength="10" required>
+                                <input type="password" class="form-control col-7 @if(!is_null($errorMessage)) is-invalid @endif" id="oldPassword" placeholder="Enter Old Password" name="oldPassword" minlength="6" maxlength="10" required>
+                                @if(!is_null($errorMessage))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errorMessage }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <label for="newPassword" class="col-3 inputRequired">New Password*</label>

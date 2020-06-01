@@ -6,7 +6,7 @@
             <div class="col-8 bg-light rounded py-4 px-5">
                 <div class="row justify-content-between">
                     <div class="col-3">
-                        <h2>Profil</h2>
+                        <h2>Profile</h2>
                     </div>
                     <div class="col-3">
                         <a href="/user/ubahpassword">
@@ -20,7 +20,7 @@
                         <form action="/user/profile" method="post">
                             @csrf
                             <div class="form-group row">
-                                <label for="userId" class="col-3">User Id</label>
+                                <label for="userId" class="col-3">User ID</label>
                                 <div class="col-1">:</div>
                                 <input type="text" class="form-control col-7" id="userId" placeholder="Enter User Id" name="id" required disabled value="{{Auth::user()->id}}">
                                 <input type="text" class="form-control col-7" id="userId" placeholder="Enter User Id" name="id" style="display:none" value="{{Auth::user()->id}}">

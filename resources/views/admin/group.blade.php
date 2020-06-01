@@ -63,7 +63,9 @@
                                                     <input value="{{$group->id}}" name="id" style="display:none">
                                                     <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Detail</button>
                                                 </form>
-                                                <form>
+                                                <form action="/admin/deleteGroup" method="POST">
+                                                    @csrf
+                                                    <input value="{{$group->id}}" name="id" style="display:none">
                                                     <button type="submit" class="btn btn-outline-danger btn-sm btn-pill btnSubmit py-2 px-3">Delete</button>
                                                 </form>
                                             </td>
