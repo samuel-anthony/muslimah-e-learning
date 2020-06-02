@@ -14,7 +14,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/user/profile" method="post">
@@ -26,11 +26,16 @@
                                 <input type="text" class="form-control col-7" id="userId" placeholder="Enter User Id" name="id" style="display:none" value="{{Auth::user()->id}}">
                             </div>
                             <div class="form-group row">
+                                <label for="userId" class="col-3">Group</label>
+                                <div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="userId" name="id" required disabled value="{{Auth::user()->group->group_name}}">
+                            </div>
+                            <div class="form-group row">
                                 <label for="nama" class="col-3">First Name</label>
                                 <div class="col-1">:</div>
                                 <input type="text" class="form-control col-7" id="nama" placeholder="Enter First Name" name="first_name" required value="{{Auth::user()->first_name}}">
                             </div>
-                            
+
                             <div class="form-group row">
                                 <label for="nama" class="col-3">Last Name</label>
                                 <div class="col-1">:</div>
