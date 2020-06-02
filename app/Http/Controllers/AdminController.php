@@ -84,8 +84,9 @@ class AdminController extends Controller
     public function groupDetail(){
         $group = group::find(request('id'));
         $users = User::whereGroupid($group->id)->get();
-        foreach($users as $user){
-            $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
+        foreach($users as $user){            
+            $currentWeek = (floor((int)date_diff(date_create($user->group->group_strt_dt),date_create())->format('%R%a days'))/7.0)+1;
+            // $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
             $ujians = [];
             if(date("Y-m-d")>=date("Y-m-d",strtotime($user->group->group_strt_dt)))
                 $ujians = ujian::where('week','<=',$currentWeek)->get();
@@ -122,11 +123,10 @@ class AdminController extends Controller
             $user_ujians = user_ujian::all();
             foreach($groups as $group){
                 $listUjian = array();
-                $dataSiswa = array();
                 foreach($ujians as $ujian){
                     $dataSiswa = array();
                     foreach($user_ujians as $user){
-                        if($user->ujian_id == $ujian->id && $user->is_finished && $user->user->group->id == $group->id){
+                        if($user->ujian_id == $ujian->id && $user->is_finished && $user->user->groupid == $group->id){
                             $total_correct =0;
                             $total_question =count($ujian->pertanyaans );
                             foreach($user->user_ujian_details as $user_ujian_detail){
@@ -143,13 +143,13 @@ class AdminController extends Controller
                             array_push($dataSiswa,$user);
                         }
                     }
-                    $ujian->dataUjian = $dataSiswa;
+                    $ujian->dataUjian = json_decode(json_encode($dataSiswa));
                     if(date("Y-m-d")>=date("Y-m-d",strtotime($group->group_strt_dt." + ".($ujian->week - 1)." weeks"))){
                         array_push($listUjian,$ujian);
                     }
-
+                    
                 }
-                $group->ujian = $listUjian;
+                $group->ujians = json_decode(json_encode($listUjian));   
             }
             return view('admin.ranking',[
                 'groups'=>$groups
@@ -165,7 +165,8 @@ class AdminController extends Controller
         if($this->isAdmin()){//klo admin larikan ke view di bawah
             $users = User::whereIsadmin(0)->get();
             foreach($users as $user){
-                $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
+                $currentWeek = (floor((int)date_diff(date_create($user->group->group_strt_dt),date_create())->format('%R%a days'))/7.0)+1;
+                // $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
                 $ujians = [];
                 if(date("Y-m-d")>=date("Y-m-d",strtotime($user->group->group_strt_dt)))
                     $ujians = ujian::where('week','<=',$currentWeek)->get();

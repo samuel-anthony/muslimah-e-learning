@@ -68,7 +68,7 @@
                                 </select>
                             </div> -->
 							<div class="row justify-content-center">
-								<button type="submit" class="btn btn-success">Add new Exam</button>
+								<button type="submit" class="btn btn-success">Add New Exam</button>
 							</div>
                         </form>
                     </div>
@@ -82,7 +82,7 @@
                                     <th scope="col" width="5%">No</th>
                                     <th scope="col" width="30%">Title</th>
                                     <th scope="col" width="25%">Week</th>
-                                    <th scope="col" width="25%">Duration in minutes</th>
+                                    <th scope="col" width="25%">Duration in Minutes</th>
                                     <th scope="col" width="15%">Action</th>
                                 </tr>
                             </thead>

@@ -67,20 +67,23 @@
 <script src="/assets/js/jquery-3.4.1.slim.min.js"></script>
 <script>   
     const groups = @json($groups);
+    console.log(groups);
     let choosenGroup,choosenExam;
     $( "#group_id" ).change(function() {
         $('#exam_id').empty().append('<option value="">Pilih Salah Satu Judul Ujian</option>');
         const id = $(this).val();
         choosenExam = null;
         choosenGroup = groups.find(group=>group.id == id);
+        console.log(choosenGroup);
         if(!!choosenGroup){
-            choosenGroup.ujian.forEach(
+            choosenGroup.ujians.forEach(
                 (ujian) => {$('#exam_id').append(new Option(ujian.exam_title,ujian.id));});
         }
     });
     $( "#exam_id" ).change(function() {
         const id = $(this).val();
-        choosenExam = choosenGroup.ujian.find(ujian=>ujian.id == id);
+        choosenExam = choosenGroup.ujians.find(ujian=>ujian.id == id);
+        console.log(choosenExam);
     });
     $( "#button_check" ).click(function(){
         if(!!choosenExam && !!choosenGroup){

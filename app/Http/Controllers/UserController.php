@@ -25,7 +25,8 @@ class UserController extends Controller
     }
     public function index(){
         if(!$this->isAdmin()){//klo bukan admin larikan ke view di bawah
-            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $currentWeek = (floor((int)date_diff(date_create(\Auth::user()->group->group_strt_dt),date_create())->format('%R%a days'))/7.0)+1;
+            // $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
             $ujians = [];
             if(date("Y-m-d")>=date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt)))
                 $ujians = ujian::where('week','<=',$currentWeek)->get();
@@ -57,7 +58,7 @@ class UserController extends Controller
     }
     public function materi(){
         if(!$this->isAdmin()){
-            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $currentWeek = (floor((int)date_diff(date_create(\Auth::user()->group->group_strt_dt),date_create())->format('%R%a days'))/7.0)+1;
             return view('user.materi',[
                 "materis"=>materi::where('week','<=',$currentWeek)->get()
             ]);
@@ -126,7 +127,8 @@ class UserController extends Controller
     }
     public function ujian(){
         if(!$this->isAdmin()){
-            $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $currentWeek = (floor((int)date_diff(date_create(\Auth::user()->group->group_strt_dt),date_create())->format('%R%a days'))/7.0)+1;
+            // $currentWeek = (floor((int)date_diff(date_create(),date_create(\Auth::user()->group->group_strt_dt))->format("%d"))/7.0)+1;
             $ujians = ujian::where('week','<=',$currentWeek)->get();
             foreach($ujians as $ujian){
                 $ujian->start_date = date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt." + ".($ujian->week-1)." weeks"));
@@ -236,7 +238,7 @@ class UserController extends Controller
         $user->phone = request('phone');
         $user->save();
 
-        return ($tempEmail == $user->email) ? redirect('/user') : redirect('sendEmailChangeEmail/'.$tempEmail.'/'.$user->email);
+        return ($tempEmail == $user->email) ? redirect('/user/profile') : redirect('sendEmailChangeEmail/'.$tempEmail.'/'.$user->email);
 
     }
 
