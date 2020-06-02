@@ -82,10 +82,36 @@ class AdminController extends Controller
     }
 
     public function groupDetail(){
+        $group = group::find(request('id'));
+        $users = User::whereGroupid($group->id)->get();
+        foreach($users as $user){
+            $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $ujians = [];
+            if(date("Y-m-d")>=date("Y-m-d",strtotime($user->group->group_strt_dt)))
+                $ujians = ujian::where('week','<=',$currentWeek)->get();
+            $totalPassed = 0;
+            foreach($ujians as $ujian){
+                $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                $total_correct_answer = 0;
+                foreach($ujian->pertanyaans as $pertanyaan){
+                    if(!is_null($user_ujian)){
+                        foreach($user_ujian->user_ujian_details as $jawaban){
+                            if($pertanyaan->id == $jawaban->pertanyaan_id){
+                                if($pertanyaan->jawaban_benar == $jawaban->jawaban){
+                                    $total_correct_answer++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                $totalPassed = (($total_correct_answer/count($ujian->pertanyaans)*1.00)>0.5) ? ($totalPassed+1): $totalPassed;
+            }
+            $user->totalPassed = $totalPassed;
+        }
         return view('admin.groupdetail',[
-            //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
-            'users'=>User::whereGroupid(request('id'))->get(),
-            'group'=>group::find(request('id'))
+            'users'=>$users,
+            'group'=>$group
         ]);
     }
 
@@ -145,7 +171,7 @@ class AdminController extends Controller
                     $ujians = ujian::where('week','<=',$currentWeek)->get();
                 $totalPassed = 0;
                 foreach($ujians as $ujian){
-                    $user_ujian = user_ujian::whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                    $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian->id)->whereIsFinished(1)->first();
                     $total_correct_answer = 0;
                     foreach($ujian->pertanyaans as $pertanyaan){
                         if(!is_null($user_ujian)){

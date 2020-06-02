@@ -27,7 +27,7 @@ header("Content-Disposition: attachment; filename=".$group->group_name.".xls");
                                             <td>{{$user->first_name}}&nbsp;{{$user->last_name}}</td>
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td class="text-center">0</td><!--masi belom ada relasi-->
+                                            <td class="text-center">{{$user->totalPassed}}</td>
                                             <td class="text-center">{{$user->group->group_name}}</td>
                                         </tr>
                                         @php($num++)
