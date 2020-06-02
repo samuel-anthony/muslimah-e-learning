@@ -126,7 +126,7 @@ class AdminController extends Controller
                 foreach($ujians as $ujian){
                     $dataSiswa = array();
                     foreach($user_ujians as $user){
-                        if($user->ujian_id == $ujian->id && $user->is_finished && $user->$user->group->id == $group->id){
+                        if($user->ujian_id == $ujian->id && $user->is_finished && $user->user->group->id == $group->id){
                             $total_correct =0;
                             $total_question =count($ujian->pertanyaans );
                             foreach($user->user_ujian_details as $user_ujian_detail){

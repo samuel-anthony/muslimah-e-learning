@@ -91,7 +91,7 @@
                                             <td>{{$user->first_name}}&nbsp;{{$user->last_name}}</td>
                                             <td>{{$user->phone}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td class="text-center">0</td><!--masi belom ada relasi-->
+                                            <td class="text-center">{{$user->totalPassed}}</td><!--masi belom ada relasi-->
                                             <td class="text-center">{{$user->group->group_name}}</td>
                                             <td style="display: flex; justify-content: space-around;">
                                                 <form action="deleteAnggota" method="post">@csrf<input name="id" value="{{$user->id}}" style="display:none">
