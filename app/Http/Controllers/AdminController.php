@@ -14,8 +14,10 @@ use Validator;
 use DateTime;
 class AdminController extends Controller
 {
+    
     public function __construct()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->middleware('auth');
     }
 

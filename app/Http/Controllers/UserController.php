@@ -17,6 +17,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->middleware('auth'); //untuk ngecek yang akses menu ini uda login belom
     }
     public function isAdmin(){//untuk ngecek yang login uda bener user bukan admin...
