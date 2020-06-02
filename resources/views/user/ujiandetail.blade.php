@@ -5,7 +5,7 @@
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
                 <h2></h2>
-                
+
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/user/saveAnswer" method="POST" id="saveAnswer">
@@ -13,7 +13,7 @@
                             <input value="{{$user_ujian->ujian->id}}" name="ujian_id" style="display:none"/>
                             @php($num=1)
                             @php($index=0)
-                            @foreach($user_ujian->ujian->pertanyaans as $pertanyaan) 
+                            @foreach($user_ujian->ujian->pertanyaans as $pertanyaan)
                             <div class="card">
                                 <h5 class="card-header">{{$num}}. {{$pertanyaan->soal_ujian}}</h5>
                                 <div class="card-body">
@@ -54,14 +54,14 @@
                             @csrf
                             <input value="{{$user_ujian->ujian->id}}" name="ujian_id" style="display:none"/>
                             @php($num=1)
-                            @foreach($user_ujian->ujian->pertanyaans as $pertanyaan) 
+                            @foreach($user_ujian->ujian->pertanyaans as $pertanyaan)
                             <div class="card">
                                 <h5 class="card-header">{{$num}}. {{$pertanyaan->soal_ujian}}</h5>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="pertanyaan"></label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="text" name="jawaban{{$pertanyaan->id}}" id="jawaban{{$pertanyaan->id}}">                                            
+                                            <input class="form-check-input" type="text" name="jawaban{{$pertanyaan->id}}" id="jawaban{{$pertanyaan->id}}">
                                         </div>
                                     </div>
                                 </div>
@@ -71,8 +71,8 @@
                         </form>
 
                         <div class="row justify-content-center mt-5">
-                            <button id="btnSave" type="submit" class="btn btn-primary mr-3" onclick="event.preventDefault(); document.getElementById('saveAnswer').submit();">Simpan Jawaban</button>
-                            <button id="btnSubmit" type="submit" class="btn btn-success" onclick="event.preventDefault(); document.getElementById('submitAnswer').submit();">Kirim Jawaban</button>
+                            <button id="btnSave" type="submit" class="btn btn-primary mr-3" onclick="event.preventDefault(); document.getElementById('saveAnswer').submit();">Save Answers</button>
+                            <button id="btnSubmit" type="submit" class="btn btn-success" onclick="event.preventDefault(); document.getElementById('submitAnswer').submit();">Submit Answers</button>
                         </div>
                     </div>
                 </div>

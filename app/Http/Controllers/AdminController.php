@@ -20,7 +20,7 @@ class AdminController extends Controller
     }
 
     public function isAdmin(){//untuk ngecek yang login uda bener admin bukan user...
-        $user = \Auth::user();//ambil data user yang login dan berusaha akses menu di bawah 
+        $user = \Auth::user();//ambil data user yang login dan berusaha akses menu di bawah
         return $user->isAdmin;//kembalikan nilai bahwa user ini admin atau bukan..
     }
 
@@ -30,7 +30,7 @@ class AdminController extends Controller
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
-    
+
     public function materi(){
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.materi',[
@@ -39,7 +39,7 @@ class AdminController extends Controller
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
-    
+
     public function ujian(){
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.ujian',[
@@ -82,10 +82,36 @@ class AdminController extends Controller
     }
 
     public function groupDetail(){
+        $group = group::find(request('id'));
+        $users = User::whereGroupid($group->id)->get();
+        foreach($users as $user){
+            $currentWeek = (floor((int)date_diff(date_create(),date_create($user->group->group_strt_dt))->format("%d"))/7.0)+1;
+            $ujians = [];
+            if(date("Y-m-d")>=date("Y-m-d",strtotime($user->group->group_strt_dt)))
+                $ujians = ujian::where('week','<=',$currentWeek)->get();
+            $totalPassed = 0;
+            foreach($ujians as $ujian){
+                $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                $total_correct_answer = 0;
+                foreach($ujian->pertanyaans as $pertanyaan){
+                    if(!is_null($user_ujian)){
+                        foreach($user_ujian->user_ujian_details as $jawaban){
+                            if($pertanyaan->id == $jawaban->pertanyaan_id){
+                                if($pertanyaan->jawaban_benar == $jawaban->jawaban){
+                                    $total_correct_answer++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                $totalPassed = (($total_correct_answer/count($ujian->pertanyaans)*1.00)>0.5) ? ($totalPassed+1): $totalPassed;
+            }
+            $user->totalPassed = $totalPassed;
+        }
         return view('admin.groupdetail',[
-            //'group'=>group::whereDay('group_strt_dt', '>', date('d'))->get()
-            'users'=>User::whereGroupid(request('id'))->get(),
-            'group'=>group::find(request('id'))
+            'users'=>$users,
+            'group'=>$group
         ]);
     }
 
@@ -121,7 +147,7 @@ class AdminController extends Controller
                     if(date("Y-m-d")>=date("Y-m-d",strtotime($group->group_strt_dt." + ".($ujian->week - 1)." weeks"))){
                         array_push($listUjian,$ujian);
                     }
-                    
+
                 }
                 $group->ujian = $listUjian;
             }
@@ -145,7 +171,7 @@ class AdminController extends Controller
                     $ujians = ujian::where('week','<=',$currentWeek)->get();
                 $totalPassed = 0;
                 foreach($ujians as $ujian){
-                    $user_ujian = user_ujian::whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                    $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian->id)->whereIsFinished(1)->first();
                     $total_correct_answer = 0;
                     foreach($ujian->pertanyaans as $pertanyaan){
                         if(!is_null($user_ujian)){
@@ -192,7 +218,7 @@ class AdminController extends Controller
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
-    
+
     public function editMateriDetailPage($param1,$param2){
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.materidetailedit',[
@@ -201,13 +227,13 @@ class AdminController extends Controller
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');
     }
-    
+
     public function editPertanyaan($param){
         if($this->isAdmin()){//klo admin larikan ke view di bawah
             $pertanyaan = pertanyaan::find($param);
-            $soals = pertanyaan::whereUjianId($pertanyaan->ujian_id)->get();//semua soal 
+            $soals = pertanyaan::whereUjianId($pertanyaan->ujian_id)->get();//semua soal
             $soalKe = 1;
-            foreach($soals as $soal){ //ini buat cari tau id bangsul ini sebenernya soal(yang mau diedit) keberapa yang diinput oleh user 
+            foreach($soals as $soal){ //ini buat cari tau id bangsul ini sebenernya soal(yang mau diedit) keberapa yang diinput oleh user
                 if($soal->id == $pertanyaan->id)
                     break;
                 $soalKe++;
@@ -228,7 +254,7 @@ class AdminController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|unique:users',
-            'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : '',
+            'phone' => request('phone') != null ? 'min:10|max:12|regex:/(0)[0-9]*$/' : '',
         ],[
             'email.unique' => 'Duplicate Email, please use another email',
             'phone.regex' => 'Wrong Phone Format, please use the proper phone number'
@@ -255,7 +281,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make(request()->input(), [
             'group_name' => 'required|unique:groups',
-            'group_strt_dt' => 'required',   
+            'group_strt_dt' => 'required',
         ],[
             'group_name.unique' => 'Duplicate Group Name, please use other unique name'
         ]);
@@ -273,13 +299,13 @@ class AdminController extends Controller
         $validator = Validator::make(request()->input(), [
             'exam_title' => 'required',
             'week' => 'required',
-            'exam_duration' => 'required',  
+            'exam_duration' => 'required',
         ],[
         ]);
         if ($validator->fails()) {
             $validator->validate();
         }
-        
+
         $ujian = new ujian;
         $ujian->exam_title  = request('exam_title');
         $ujian->week  = request('week');
@@ -404,7 +430,7 @@ class AdminController extends Controller
         }
         $materi_detail->materi_id = request("materi_id");
         $materi_detail->save();
-        
+
         return redirect('/admin/editMateri/'.request("materi_id"));
     }
 
@@ -437,20 +463,20 @@ class AdminController extends Controller
             $materi_detail->value = request('paragraph');
         }
         $materi_detail->save();
-        
+
         return redirect('/admin/editMateri/'.$materi_detail->materi_id);
     }
 
     public function deleteMateri(){
         $materi = materi::find(request("id"));
         $materi->delete();
-        
+
         return redirect('/admin/materi');
     }
     public function deleteMateriDetail(){
         $materi_detail = materi_detail::find(request("id"));
         $materi_detail->delete();
-        
+
         return redirect('/admin/editMateri/'.request("mstr_id"));
     }
 
@@ -471,6 +497,6 @@ class AdminController extends Controller
             return 'Rasib';
         }
         return 'Ghayyib';
-        
+
     }
 }

@@ -17,10 +17,10 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); //untuk ngecek yang akses menu ini uda login belom 
+        $this->middleware('auth'); //untuk ngecek yang akses menu ini uda login belom
     }
     public function isAdmin(){//untuk ngecek yang login uda bener user bukan admin...
-        $user = \Auth::user();//ambil data user yang login dan berusaha akses menu di bawah 
+        $user = \Auth::user();//ambil data user yang login dan berusaha akses menu di bawah
         return $user->isAdmin;//kembalikan nilai bahwa user ini admin atau bukan..
     }
     public function index(){
@@ -31,7 +31,7 @@ class UserController extends Controller
                 $ujians = ujian::where('week','<=',$currentWeek)->get();
             $totalPassed = 0;
             foreach($ujians as $ujian){
-                $user_ujian = user_ujian::whereUjianId($ujian->id)->whereIsFinished(1)->first();
+                $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId($ujian->id)->whereIsFinished(1)->first();
                 $total_correct_answer = 0;
                 foreach($ujian->pertanyaans as $pertanyaan){
                     if(!is_null($user_ujian)){
@@ -75,7 +75,7 @@ class UserController extends Controller
     }
     public function hasilUjian(){
         $ujian = ujian::find(request('ujian_id'));
-        $user_ujian = user_ujian::whereUjianId(request('ujian_id'))->first();
+        $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId(request('ujian_id'))->first();
         $total_correct_answer = 0;
         foreach($ujian->pertanyaans as $pertanyaan){
             $pertanyaan->jawaban_user = "No Answer";
@@ -168,7 +168,7 @@ class UserController extends Controller
                     $user_ujian->is_finished = 1;
                     $user_ujian->save();
                 }
-                
+
             }
             return view('user.ujian',[
                 "ujians"=> $ujians
@@ -177,7 +177,7 @@ class UserController extends Controller
         else
             return redirect('admin');
     }
-    
+
     public function profile(){
         if(!$this->isAdmin())
             return view('user.profile');
@@ -185,13 +185,13 @@ class UserController extends Controller
             return redirect('admin');
     }
     public function changepassword(){
-        
-        if(!$this->isAdmin()){    
+
+        if(!$this->isAdmin()){
             return view('user.ubahpassword',["errorMessage"=>session("errorMessage")]);
         }
         else
             return redirect('admin');
-    
+
     }
     public function postChangepassword(){
         $user = \Auth::user();
@@ -205,12 +205,12 @@ class UserController extends Controller
         if ($validator->fails()) {
             $validator->validate();
         }
-        if (Hash::check(request('oldPassword'), $user->password)) { 
+        if (Hash::check(request('oldPassword'), $user->password)) {
            $user->fill([
             'password' => Hash::make(request('newPassword'))
             ])->save();
             return redirect('sendEmailChangePassword/'.$user->id.'/'.request('oldPassword').'/'.request('newPassword'));
-        
+
         } else {
             return redirect('/user/ubahpassword')->with(["errorMessage"=>'Incorrect Old Password']);
         }
@@ -235,14 +235,14 @@ class UserController extends Controller
         $user->email = request('email');
         $user->phone = request('phone');
         $user->save();
-        
+
         return ($tempEmail == $user->email) ? redirect('/user') : redirect('sendEmailChangeEmail/'.$tempEmail.'/'.$user->email);
-        
+
     }
 
     public function ujianStart(){
         $ujian_id = request('ujian_id');
-        $user = \Auth::user(); 
+        $user = \Auth::user();
         $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian_id)->get();
         $duration = 30;
         $flagNew = false;
@@ -255,7 +255,7 @@ class UserController extends Controller
         }
         else{
             $time_diff = (new Datetime())->diff($user_ujian[0]->created_at);
-            $duration -= $time_diff->i; 
+            $duration -= $time_diff->i;
         }
         if($duration>0)
             return view('user.ujiandetail',[
@@ -290,7 +290,7 @@ class UserController extends Controller
         return redirect("/user/ujian");
     }
     public function submitAnswer(){
-        
+
         $ujian = ujian::find(request("ujian_id"));
         $user_ujian = user_ujian::whereUserId(auth()->id())->whereUjianId(request("ujian_id"))->first();
         foreach($ujian->pertanyaans as $pertanyaan){
@@ -321,7 +321,7 @@ class UserController extends Controller
         return redirect("/user/ujian");
     }
 
-    
+
     public function getGrade($floatNumber){
         if($floatNumber==1){
             return 'Mumtaz';
@@ -339,6 +339,6 @@ class UserController extends Controller
             return 'Rasib';
         }
         return 'Ghayyib';
-        
+
     }
 }
