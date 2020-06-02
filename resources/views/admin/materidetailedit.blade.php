@@ -26,7 +26,7 @@
                 <div class="card">
                     <h5 class="card-header">New Material</h5>
                     <div class="col-12 my-5">
-                        <form action="/admin/editMateriDetail" method="post"  enctype="multipart/form-data">
+                        <form action="/admin/editMateriDetail" method="post"  enctype="multipart/form-data" autocomplete="off" >
                             @csrf
                             <div class="form-group row">
                                 <label for="file_upload" class="col-3">Select Material Type</label>

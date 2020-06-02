@@ -7,7 +7,7 @@
                 <h2>Exam</h2>
 
                 <div class="mt-5">
-                    <form action="/admin/submitEditUjian" method="post">
+                    <form action="/admin/submitEditUjian" method="post" autocomplete="off" >
                         @csrf
                         <input type="text" style="display:none" name="ujian_id" value="{{$ujian->id}}">
                         <div class="form-group row">
@@ -36,7 +36,7 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         @if($soalKe > count($soals))
-                            <form action="/admin/submitPertanyaan" method="post">
+                            <form action="/admin/submitPertanyaan" method="post"autocomplete="off" >
                                 @csrf
                                 <input type="text" style="display:none" name="ujian_id" value="{{$ujian->id}}">
                                 <div class="form-group row">
@@ -79,7 +79,7 @@
                                 </div>
                             </form>
                         @else
-                            <form action="/admin/submitEditPertanyaan" method="post">
+                            <form action="/admin/submitEditPertanyaan" method="post" autocomplete="off" >
                             @csrf
                                 <input type="text" style="display:none" name="ujian_id" value="{{$ujian->id}}">
                                 <input type="text" style="display:none" name="soal_id" value="{{$soals[$soalKe-1]->id}}">

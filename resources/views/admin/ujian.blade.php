@@ -8,7 +8,7 @@
                 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <form action="/admin/ujian" method="post">
+                        <form action="/admin/ujian" method="post" autocomplete="off" >
                             @csrf
                             <div class="form-group row">
                                 <label for="examTitle" class="col-3 inputRequired">Exam Title*</label>

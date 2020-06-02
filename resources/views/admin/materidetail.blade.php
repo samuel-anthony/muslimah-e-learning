@@ -8,7 +8,7 @@
 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <form action="/admin/submitMateriDetail" method="post"  enctype="multipart/form-data">
+                        <form action="/admin/submitMateriDetail" method="post"  enctype="multipart/form-data" autocomplete="off" >
                             @csrf
                             <div class="form-group row">
                                 <label for="file_upload" class="col-3">Select Material Type</label>
