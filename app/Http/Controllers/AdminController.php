@@ -298,7 +298,7 @@ class AdminController extends Controller
     public function tambahUjian(){
         $validator = Validator::make(request()->input(), [
             'exam_title' => 'required',
-            'week' => 'required|unique:ujians',
+            'week' => 'required|unique:ujians|gt:0',
             'exam_duration' => 'required',
         ],[
             'week.unique' => 'The week already has another exam'
