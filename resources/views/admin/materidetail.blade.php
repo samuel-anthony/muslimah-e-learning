@@ -68,8 +68,8 @@
                             <div class="card">
                                 <h5 class="card-header"></h5>
                                 <div class="card-body">
-                                    @if($detail->type == "paragraph")            
-                                        {!! nl2br($detail->value) !!}
+                                    @if($detail->type == "paragraph")    
+                                        <p dir="auto" class="u2">{!! nl2br($detail->value) !!}</p>
                                     @elseif($detail->type == "image/png")
                                         <div class="row justify-content-center">
                                             <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px" alt="">
@@ -111,7 +111,7 @@
                         <div class="card mb-5">
                             <h5 class="card-header"></h5>
                             @if($detail->type == "paragraph")        
-                                {!! nl2br($detail->value) !!}
+                                <p dir="auto" width="100%">{!! nl2br($detail->value) !!}</p>
                             @elseif($detail->type == "image/png")
                                 <div class="row justify-content-center">
                                     <img src="data:image/png;base64,{{$detail->value}}" data-toggle="modal" data-target="#previewMedia" width="400px"  alt="">

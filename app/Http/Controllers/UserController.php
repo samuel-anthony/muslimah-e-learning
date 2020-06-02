@@ -221,7 +221,7 @@ class UserController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|unique:users,id,'.request('id'),
-            'phone' => request('phone') != null ? 'regex:/(0)[0-9]*$/' : ''
+            'phone' => request('phone') != null ? 'min:10|max:12|regex:/(0)[0-9]*$/' : ''
         ],[
             'email.unique' => 'Duplicate Email, please use another email'
         ]);
