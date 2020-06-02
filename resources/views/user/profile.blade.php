@@ -49,7 +49,12 @@
                             <div class="form-group row">
                                 <label for="nomor" class="col-3">Phone Number</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" id="nomor" placeholder="Enter Phone Number" name="phone" value="{{Auth::user()->phone}}">
+                                <input type="number" class="form-control col-7 @error('phone') is-invalid @enderror" id="nomor" placeholder="Enter Phone Number" name="phone" value="{{Auth::user()->phone}}">
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="row justify-content-center">
                                 <button type="submit" class="btn btn-success">Save</button>

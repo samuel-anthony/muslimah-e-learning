@@ -301,6 +301,7 @@ class AdminController extends Controller
             'week' => 'required|unique:ujians',
             'exam_duration' => 'required',
         ],[
+            'week.unique' => 'The week already has another exam'
         ]);
         if ($validator->fails()) {
             $validator->validate();

@@ -18,7 +18,12 @@
                             <div class="form-group row">
                                 <label for="examDate" class="col-3 inputRequired">Week*</label>
 								<div class="col-1">:</div>
-                                <input type="number" class="form-control col-7" id="examWeek" placeholder="Enter week when the material will be posted" name="week" required>
+                                <input type="number" class="form-control col-7 @error('week') is-invalid @enderror" id="examWeek" placeholder="Enter week when the material will be posted" name="week" required>
+                                @error('week')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 							<!-- <div class="form-group row">
                                 <label for="examTime" class="col-3 inputRequired">Exam Time*</label>
