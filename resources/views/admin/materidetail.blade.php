@@ -77,7 +77,7 @@
                                     @elseif($detail->type == "application/pdf")
                                         <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
                                     @elseif($detail->type == "video/mp4")
-                                        <video controls width="100%" height="300">
+                                        <video controls width="100%" height="300" download>
                                             <source src="data:video/mp4;base64,{{$detail->value}}" />
                                         </video>
                                     @endif
@@ -119,7 +119,7 @@
                             @elseif($detail->type == "application/pdf")
                                 <iframe src="data:application/pdf;base64,{{$detail->value}}" height="500" width="100%"></iframe>
                             @elseif($detail->type == "video/mp4")
-                                <video controls width="100%" height="300">
+                                <video controls width="100%" height="300" download>
                                     <source src="data:video/mp4;base64,{{$detail->value}}" />
                                 </video>
                             @endif
