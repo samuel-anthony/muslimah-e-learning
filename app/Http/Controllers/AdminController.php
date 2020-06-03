@@ -484,7 +484,7 @@ class AdminController extends Controller
         return redirect('/admin/editMateri/'.request("mstr_id"));
     }
 
-    public function getGrade($floatNumber){
+    public function getGrade($floatNumber){ //untuk nilai
         if($floatNumber==1){
             return 'Mumtaz';
         }
