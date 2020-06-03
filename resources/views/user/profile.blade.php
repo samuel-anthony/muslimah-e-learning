@@ -33,23 +33,28 @@
                             <div class="form-group row">
                                 <label for="nama" class="col-3">First Name</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="nama" placeholder="Enter First Name" name="first_name" required value="{{Auth::user()->first_name}}">
+                                <input type="text" class="form-control col-7" id="nama" placeholder="Enter First Name" name="first_name" required  @if(old('first_name'))value="{{old('first_name')}}" @else value="{{Auth::user()->first_name}}" @endif>
                             </div>
 
                             <div class="form-group row">
                                 <label for="nama" class="col-3">Last Name</label>
                                 <div class="col-1">:</div>
-                                <input type="text" class="form-control col-7" id="nama" placeholder="Enter Last Name" name="last_name" required value="{{Auth::user()->last_name}}">
+                                <input type="text" class="form-control col-7" id="nama" placeholder="Enter Last Name" name="last_name" required  @if(old('last_name'))value="{{old('last_name')}}" @else value="{{Auth::user()->last_name}}" @endif>
                             </div>
                             <div class="form-group row">
                                 <label for="email" class="col-3">Email</label>
                                 <div class="col-1">:</div>
-                                <input type="email" class="form-control col-7" id="email" placeholder="Enter Email" name="email" required value="{{Auth::user()->email}}">
+                                <input type="email" class="form-control col-7 @error('email') is-invalid @enderror" id="email" placeholder="Enter Email" name="email" required @if(old('email'))value="{{old('email')}}" @else value="{{Auth::user()->email}}" @endif>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <label for="nomor" class="col-3">Phone Number</label>
                                 <div class="col-1">:</div>
-                                <input type="number" class="form-control col-7 @error('phone') is-invalid @enderror" id="nomor" placeholder="Enter Phone Number" name="phone" value="{{Auth::user()->phone}}">
+                                <input type="number" class="form-control col-7 @error('phone') is-invalid @enderror" id="nomor" placeholder="Enter Phone Number" name="phone"  @if(old('phone'))value="{{old('phone')}}" @else value="{{Auth::user()->phone}}" @endif>
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

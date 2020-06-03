@@ -4,8 +4,7 @@
     <div class="container">
         <div class="row mt-3 justify-content-center">
             <div class="col-10 bg-light rounded py-4 px-5">
-                <h2></h2>
-
+                <h2 id="time"></h2>
                 <div class="row mt-5">
                     <div class="col-12">
                         <form action="/user/saveAnswer" method="POST" id="saveAnswer">
@@ -121,5 +120,20 @@
             $("#jawaban"+data2[index].pertanyaan_id).val(data2[index].jawaban);
         });
     </script>
+    <script>
+        var countDownDate = {{$duration}}
+        console.log(countDownDate);
+        var x = setInterval(function() {
+            countDownDate--;
 
+            var minutes = Math.floor(countDownDate/60);
+            var seconds = Math.floor(countDownDate%60);
+            $("#time").text(minutes+":"+seconds);
+                
+            if (countDownDate <= 0) {
+                clearInterval(x);
+                $("#btnSubmit").click();
+            }
+        }, 1000);
+    </script>
 @endsection

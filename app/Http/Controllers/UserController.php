@@ -136,7 +136,8 @@ class UserController extends Controller
                 $ujian->end_date = date("Y-m-d",strtotime(\Auth::user()->group->group_strt_dt." + ".$ujian->week." weeks"));
                 $time_diff = (new Datetime($ujian->start_date))->diff(new DateTime($ujian->end_date));
                 $time_diff2 = (new Datetime($ujian->start_date))->diff(new DateTime());
-                $ujian->expired = ($time_diff->d < $time_diff2->d) && $time_diff2->d > 7 ? true : false;
+                $waktu_berlalu_semenjak_ujian = $time_diff2->y * 365 + $time_diff2->m*30 + $time_diff->d;
+                $ujian->expired = ($time_diff->d < $waktu_berlalu_semenjak_ujian) && $waktu_berlalu_semenjak_ujian > 7 ? true : false;
                 $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId($ujian->id)->first();
                 if(!is_null($user_ujian)){
                     // $time_diff = (new Datetime())->diff($user_ujian->created_at);
@@ -223,7 +224,7 @@ class UserController extends Controller
         $validator = Validator::make(request()->input(), [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|unique:users,id,'.request('id'),
+            'email' => 'required|email|unique:users,email,'.request('id'),
             'phone' => request('phone') != null ? 'min:10|max:12|regex:/(0)[0-9]*$/' : ''
         ],[
             'email.unique' => 'Duplicate Email, please use another email'
@@ -244,21 +245,22 @@ class UserController extends Controller
     }
 
     public function ujianStart(){
-        $ujian_id = request('ujian_id');
+        $ujian = ujian::find(request('ujian_id'));
         $user = \Auth::user();
-        $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian_id)->get();
-        $duration = 30;
+        $user_ujian = user_ujian::whereUserId($user->id)->whereUjianId($ujian->id)->get();
+        $duration = $ujian->exam_duration;//dalam menit
+        $duration*=60;//dalam seken
         $flagNew = false;
         if(count($user_ujian)==0){
             $flagNew = true;
             $user_ujian = new user_ujian;
-            $user_ujian->ujian_id = $ujian_id;
+            $user_ujian->ujian_id = $ujian->id;
             $user_ujian->user_id = $user->id;
             $user_ujian->save();
         }
         else{
             $time_diff = (new Datetime())->diff($user_ujian[0]->created_at);
-            $duration -= $time_diff->i;
+            $duration -= (($time_diff->i*60) + $time_diff->s);
         }
         if($duration>0)
             return view('user.ujiandetail',[
@@ -267,7 +269,7 @@ class UserController extends Controller
                 "duration"=>$duration,
             ]);
         else{
-            return redirect('/user/ujian')->with('alert','data successfully approved');
+            return redirect('/user/ujian')->with('alert','exam has been submitted');
         }
     }
 
