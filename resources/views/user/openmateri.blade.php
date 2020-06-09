@@ -30,6 +30,44 @@
                 </div>
             </div>
         </div>
-          
+        <div class="row mt-3 justify-content-center">
+            <div class="col-10 bg-light rounded py-4 px-5">
+                <h2>Question and Answer</h2>
+                <form action="/user/submitNewComment" method="post">
+                    @csrf
+                    <input value="{{$materi->id}}" style="display:none" name="id">
+                    <div class="form-group row" id="submit_form">
+                        <label for="paragraph" class="col-3">Write a new discussion</label>
+                        <label class="col-1 col-form-label">:</label>
+                        <textarea class="form-control col-7" name="content" rows="5"name="txt" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Post</button>
+                </form>
+                <br>
+                <div class="preview">
+                    <h2>Comments</h2>
+                    @if(count($comments)>0)
+                        @foreach($comments as $comment)
+                            {{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($comment->content) !!}
+                            @foreach($comment->replies as $reply)
+                                <p class="ml-5">{{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($reply->content) !!}</p>
+                            @endforeach
+                            <form class="ml-5" action="/user/replyComment" method="post">
+                                @csrf
+                                <input value="{{$materi->id}}" style="display:none" name="id">
+                                <input value="{{$comment->id}}" style="display:none" name="parent_id">
+                                <div class="form-group row" id="submit_form">
+                                    <textarea class="form-control col-7" name="content" name="txt" required placeholder="write a reply"></textarea>
+                                    <button type="submit" class="btn btn-success ml-3 col-1">Post</button>
+                                </div>
+                            </form>
+                        @endforeach
+                    @else
+                        No Comments has posted
+                    @endif
+                </div>
+            </div>
+        </div>
+        <br>
     </div>
 @endsection

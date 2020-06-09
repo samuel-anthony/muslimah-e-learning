@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNyobasTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateNyobasTable extends Migration
      */
     public function up()
     {
-        Schema::create('nyobas', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('materi_id');
+            $table->integer('user_id');
+            $table->integer('parent_id')->nullable();
+            $table->string('content');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateNyobasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nyobas');
+        Schema::dropIfExists('comments');
     }
 }

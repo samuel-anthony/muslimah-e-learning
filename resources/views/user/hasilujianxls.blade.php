@@ -1,27 +1,23 @@
-@extends('layouts.app')
+<?php
+// Skrip berikut ini adalah skrip yang bertugas untuk meng-export data tadi ke excell
+header("Content-type: application/vnd-ms-excel");
+header("Content-Disposition: attachment; filename=".$ujian->exam_title.".xls");
+?>
 
-@section('content')
-<div class="container">
-        <div class="row mt-3 justify-content-center">
-            <div class="col-10 bg-light rounded py-4 px-5">
-                <h2>{{$ujian->exam_title}}</h2>
-                
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <div class="form-group row">
-                            <label for="judul" class="col-3 inputRequired">Score</label>
-                            <div class="col-1">:</div>
-                            <label for="judul" class="col-3">{{$ujian->score*100}}%</label>
-                        </div>
-                        <div class="form-group row">
-                            <label for="judul" class="col-3 inputRequired">Exam Grade</label>
-                            <div class="col-1">:</div>
-                            <label for="judul" class="col-3">{{$ujian->grade}}</label>
-                        </div>
+            <h2>{{$ujian->exam_title}}</h2>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label for="judul" class="col-3 inputRequired">Score : {{$ujian->score*100}}%</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="judul" class="col-3 inputRequired">Exam Grade : {{$ujian->grade}}</label>
                     </div>
                 </div>
-		
-                <div class="row mt-5">
+            </div>
+            <br>
+            <div class="row mt-5">
                     <div class="col-12">
                         <table class="table table-sm table-bordered">
                             <thead>
@@ -47,13 +43,6 @@
                         </table>
                     </div>
                 </div>
-
-                <form action="/user/exportHasilUjian" method="POST">
-                    @csrf
-                    <input value="{{$ujian->id}}" name="ujian_id" style="display:none">
-                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Download Report</button>
-                </form>
             </div>
         </div>
     </div>
-@endsection

@@ -31,6 +31,11 @@
                                 <input type="text" class="form-control col-7" id="userId" name="id" required disabled value="{{Auth::user()->group->group_name}}">
                             </div>
                             <div class="form-group row">
+                                <label for="userId" class="col-3">Gender</label>
+                                <div class="col-1">:</div>
+                                <input type="text" class="form-control col-7" id="userId" disabled value="Female">
+                            </div>
+                            <div class="form-group row">
                                 <label for="nama" class="col-3">First Name</label>
                                 <div class="col-1">:</div>
                                 <input type="text" class="form-control col-7" id="nama" placeholder="Enter First Name" name="first_name" required  @if(old('first_name'))value="{{old('first_name')}}" @else value="{{Auth::user()->first_name}}" @endif>

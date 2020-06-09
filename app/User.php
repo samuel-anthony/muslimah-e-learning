@@ -38,11 +38,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function group(){
-        return $this->hasOne('App\group','id','groupid');
-    }
     public function user_ujian(){
         return $this->belongsTo('App\user_ujian','id','user_id');
     }
+    public function group(){
+        return $this->belongsTo('App\group','groupid','id');
+    }
+    
+    public function comments(){
+        return $this->hasMany('App\comment','user_id','id');
+    }
+    
 }

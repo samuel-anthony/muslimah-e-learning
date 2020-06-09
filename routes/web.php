@@ -42,6 +42,9 @@ Route::prefix('user')->group(function (){
     Route::post('/saveAnswer','UserController@saveAnswer');  
     Route::post('/submitAnswer','UserController@submitAnswer');  
     Route::post('/hasilUjian','UserController@hasilUjian');
+    Route::post('/exportHasilUjian','UserController@hasilUjianReport');
+    Route::post('/submitNewComment','UserController@submitNewComment');
+    Route::post('/replyComment','UserController@replyComment');
 });
 
 Route::prefix('admin')->group(function (){    
