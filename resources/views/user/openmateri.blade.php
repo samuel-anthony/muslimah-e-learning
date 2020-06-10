@@ -36,12 +36,14 @@
                 <form action="/user/submitNewComment" method="post">
                     @csrf
                     <input value="{{$materi->id}}" style="display:none" name="id">
-                    <div class="form-group row" id="submit_form">
+                    <div class="form-group row col-12" id="submit_form">
                         <label for="paragraph" class="col-3">Write a new discussion</label>
                         <label class="col-1 col-form-label">:</label>
                         <textarea class="form-control col-7" name="content" rows="5"name="txt" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success">Post</button>
+                    <div class="row justify-content-end col-11">
+                        <button type="submit" class="btn btn-success">Post</button>
+                    </div>
                 </form>
                 <br>
                 <div class="preview">
@@ -50,7 +52,7 @@
                         @foreach($comments as $comment)
                             {{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($comment->content) !!}
                             @foreach($comment->replies as $reply)
-                                <p class="ml-5">{{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($reply->content) !!}</p>
+                                <p class="ml-5">{{$reply->user->first_name.' '.$reply->user->last_name}}<b>@if(is_null($reply->user->group)) {{' (admin) '}} @else {{' ('.$reply->user->group->group_name.') '}} @endif</b> :<br>{!! nl2br($reply->content) !!}</p>
                             @endforeach
                             <form class="ml-5" action="/user/replyComment" method="post">
                                 @csrf

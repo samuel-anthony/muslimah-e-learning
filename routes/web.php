@@ -77,4 +77,6 @@ Route::prefix('admin')->group(function (){
     Route::post('/deleteMateriDetail','AdminController@deleteMateriDetail');
     Route::post('/editMateriDetail','AdminController@editMateriDetail');
     Route::post('/exportGroupData','AdminController@groupDetail');
+    Route::post('/submitNewComment','AdminController@submitNewComment');
+    Route::post('/replyComment','AdminController@replyComment');
 });

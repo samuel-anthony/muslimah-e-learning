@@ -9,10 +9,16 @@ header("Content-Disposition: attachment; filename=".$ujian->exam_title.".xls");
             <div class="row mt-5">
                 <div class="col-12">
                     <div class="form-group row">
+                        <label for="judul" class="col-3 inputRequired">Exam Audience : {{Auth::user()->first_name.' '.Auth::user()->last_name}}</label>
+                    </div>
+                    <div class="form-group row">
                         <label for="judul" class="col-3 inputRequired">Score : {{$ujian->score*100}}%</label>
                     </div>
                     <div class="form-group row">
                         <label for="judul" class="col-3 inputRequired">Exam Grade : {{$ujian->grade}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="judul" class="col-3 inputRequired">Status : @if($ujian->score>0.5)Passed @else Failed @endif</label>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,11 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="form-group row">
+                            <label for="judul" class="col-3 inputRequired">Exam Audience</label>
+                            <div class="col-1">:</div>
+                            <label for="judul" class="col-3">{{Auth::user()->first_name.' '.Auth::user()->last_name}}</label>
+                        </div>
+                        <div class="form-group row">
                             <label for="judul" class="col-3 inputRequired">Score</label>
                             <div class="col-1">:</div>
                             <label for="judul" class="col-3">{{$ujian->score*100}}%</label>
@@ -17,6 +22,11 @@
                             <label for="judul" class="col-3 inputRequired">Exam Grade</label>
                             <div class="col-1">:</div>
                             <label for="judul" class="col-3">{{$ujian->grade}}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="judul" class="col-3 inputRequired">Status</label>
+                            <div class="col-1">:</div>
+                            <label for="judul" class="col-3">@if($ujian->score>0.5)Passed @else Failed @endif</label>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use App\ujian;
 use App\pertanyaan;
 use App\materi;
 use App\materi_detail;
+use App\comment;
 use App\user_ujian;
 use Validator;
 use DateTime;
@@ -161,6 +162,15 @@ class AdminController extends Controller
             return redirect('user');
     }
 
+    public function replyComment(){
+        $comment = new comment;
+        $comment->materi_id = request('id');
+        $comment->parent_id = request('parent_id');
+        $comment->content = request('content');   
+        $comment->user_id = \Auth::user()->id;   
+        $comment->save();
+        return redirect('admin/editMateri/'.request('id'));
+    }
     public function anggota(){
 
 
@@ -214,9 +224,22 @@ class AdminController extends Controller
 
     public function editMateri($param){
         $materi = materi::find($param);
+        $comments = comment::whereParentId(null)->get();
+        $replies = comment::whereNotNull('parent_id')->get();
+        foreach($comments as $comment){
+            $listReplies =  array();
+            foreach($replies as $reply){
+                $reply->user->group = json_decode(json_encode($reply->user->group));
+                $reply->user = json_decode(json_encode($reply->user));
+                if($reply->parent_id == $comment->id)
+                    array_push($listReplies,$reply);
+            }
+            $comment->replies = json_decode(json_encode($listReplies));
+        }
         if($this->isAdmin())//klo admin larikan ke view di bawah
             return view('admin.materidetail',[
-                'materi'=> $materi
+                'materi'=> $materi,
+                'comments'=>$comments
             ]);
         else//user biasa berusaha open url page admin, jangan bole.. redirect kembali ke /user
             return redirect('user');

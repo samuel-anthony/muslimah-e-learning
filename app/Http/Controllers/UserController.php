@@ -75,6 +75,10 @@ class UserController extends Controller
             foreach($comments as $comment){
                 $listReplies =  array();
                 foreach($replies as $reply){
+                    if(is_null($reply->user->group))
+                        $reply->user->group = array("group_name"=>"admin");
+                    $reply->user->group = json_decode(json_encode($reply->user->group));
+                    $reply->user = json_decode(json_encode($reply->user));
                     if($reply->parent_id == $comment->id)
                         array_push($listReplies,$reply);
                 }
