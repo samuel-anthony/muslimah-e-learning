@@ -9,7 +9,7 @@
                     <div class="col-4">
                         <a href="">
                             <div class="mx-3">
-                                <img src="/assets/img/sitiaisyah.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
+                                <img src="/assets/img/image.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
                                 <h4>Siti Aisyah</h4>
                                 <h6>sitiaisyah@email.com</h6>
                                 <h6>081234567890</h6>
@@ -19,7 +19,7 @@
                     <div class="col-4">
                         <a href="">
                             <div class="mx-3">
-                                <img src="/assets/img/nurulqoyimah.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
+                                <img src="/assets/img/image.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
                                 <h4>Nurul Qoyimah</h4>
                                 <h6>nurulqoyimah@email.com</h6>
                                 <h6>081234567890</h6>
@@ -29,7 +29,7 @@
                     <div class="col-4">
                         <a href="">
                             <div class="mx-3">
-                                <img src="/assets/img/fatimahhumairah.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
+                                <img src="/assets/img/image.jpeg" width="150" height="150" class="d-inline-block align-top my-4" alt="">
                                 <h4>Fatimah Humairah</h4>
                                 <h6>fatimahhumairah@email.com</h6>
                                 <h6>081234567890</h6>

@@ -36,7 +36,7 @@ class MailController extends Controller
 
         \Mail::to($user->email)->send(new SendMail($details));
         \Mail::to($old)->send(new SendMail($details));
-        return redirect('/admin/anggota')->with('alertSuccess','successfully create to add new user');
+        return redirect('/user/profile')->with('alertSuccess','successfully create to add new user');
     }
 
 
@@ -53,7 +53,7 @@ class MailController extends Controller
         ];
 
         \Mail::to($user->email)->send(new SendMail($details));
-        return redirect('/admin/anggota')->with('alertSuccess','successfully create to add new user');
+        return redirect('/user/profile')->with('alertSuccess','successfully create to add new user');
     }
 
 

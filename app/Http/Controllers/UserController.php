@@ -70,8 +70,8 @@ class UserController extends Controller
     }
     public function openMateri($param){
         if(!$this->isAdmin()){
-            $comments = comment::whereParentId(null)->get();
-            $replies = comment::whereNotNull('parent_id')->get();
+            $comments = comment::whereParentId(null)->whereMateriId($param)->get();
+            $replies = comment::whereNotNull('parent_id')->whereMateriId($param)->get();
             foreach($comments as $comment){
                 $listReplies =  array();
                 foreach($replies as $reply){
@@ -92,6 +92,20 @@ class UserController extends Controller
         else
             return redirect('admin');
     }
+
+    public function deleteComment(){
+        $comment = comment::find(request('id'));
+        $materi_id = $comment->materi_id; 
+        if(is_null($comment->parent_id)){
+            $replies = comment::whereParentId($comment->id)->get();
+            foreach($replies as $reply){
+                $reply->delete();
+            }
+        }
+        $comment->delete();
+        return redirect('user/openMateri/'.$materi_id);
+    }
+
     public function submitNewComment(){
         $comment = new comment;
         $comment->materi_id = request('id');

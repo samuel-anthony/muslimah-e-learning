@@ -45,6 +45,7 @@ Route::prefix('user')->group(function (){
     Route::post('/exportHasilUjian','UserController@hasilUjianReport');
     Route::post('/submitNewComment','UserController@submitNewComment');
     Route::post('/replyComment','UserController@replyComment');
+    Route::post('/deleteComment','UserController@deleteComment');
 });
 
 Route::prefix('admin')->group(function (){    
@@ -79,4 +80,5 @@ Route::prefix('admin')->group(function (){
     Route::post('/exportGroupData','AdminController@groupDetail');
     Route::post('/submitNewComment','AdminController@submitNewComment');
     Route::post('/replyComment','AdminController@replyComment');
+    Route::post('/deleteComment','AdminController@deleteComment');
 });

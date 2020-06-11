@@ -135,9 +135,19 @@
                     <h2>Comments</h2>
                     @if(count($comments)>0)
                         @foreach($comments as $comment)
-                            {{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($comment->content) !!}
+                            {{$comment->user->first_name.' '.$comment->user->last_name}}<b>{{' ('.$comment->user->group->group_name.') '}}</b> :<br>{!! nl2br($comment->content) !!}<b style="color:#828282">&nbsp;&nbsp;&nbsp;&nbsp;{{$comment->updated_at}}</b>
+                            <form action="/admin/deleteComment" method="post">
+                                @csrf
+                                <input value="{{$comment->id}}" style="display:none" name="id">
+                                <button type="submit" class="btn btn-outline-danger col-1">delete</button>
+                            </form>
                             @foreach($comment->replies as $reply)
-                                <p class="ml-5">{{$reply->user->first_name.' '.$reply->user->last_name}}<b>@if(is_null($reply->user->group)) {{' (admin) '}} @else {{' ('.$reply->user->group->group_name.') '}} @endif</b> :<br>{!! nl2br($reply->content) !!}</p>
+                                <p class="ml-5">{{$reply->user->first_name.' '.$reply->user->last_name}}<b>@if(is_null($reply->user->group)) {{' (admin) '}} @else {{' ('.$reply->user->group->group_name.') '}} @endif</b> :
+                                <br/>{!! nl2br($reply->content) !!}<b style="color:#828282">&nbsp;&nbsp;&nbsp;&nbsp;{{$reply->updated_at}}</b><form action="/admin/deleteComment" method="post">
+                                @csrf
+                                <input value="{{$reply->id}}" style="display:none" name="id">
+                                <button type="submit" class="btn btn-outline-danger col-1">delete</button>
+                                </form></p>
                             @endforeach
                             <form class="ml-5" action="/admin/replyComment" method="post">
                                 @csrf

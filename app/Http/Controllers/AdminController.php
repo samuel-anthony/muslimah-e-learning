@@ -171,6 +171,19 @@ class AdminController extends Controller
         $comment->save();
         return redirect('admin/editMateri/'.request('id'));
     }
+
+    public function deleteComment(){
+        $comment = comment::find(request('id'));
+        $materi_id = $comment->materi_id; 
+        if(is_null($comment->parent_id)){
+            $replies = comment::whereParentId($comment->id)->get();
+            foreach($replies as $reply){
+                $reply->delete();
+            }
+        }
+        $comment->delete();
+        return redirect('admin/editMateri/'.$materi_id);
+    }
     public function anggota(){
 
 
@@ -224,8 +237,8 @@ class AdminController extends Controller
 
     public function editMateri($param){
         $materi = materi::find($param);
-        $comments = comment::whereParentId(null)->get();
-        $replies = comment::whereNotNull('parent_id')->get();
+        $comments = comment::whereParentId(null)->whereMateriId($param)->get();
+        $replies = comment::whereNotNull('parent_id')->whereMateriId($param)->get();
         foreach($comments as $comment){
             $listReplies =  array();
             foreach($replies as $reply){
