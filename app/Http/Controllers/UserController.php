@@ -14,6 +14,7 @@ use App\user_ujian_detail;
 use App\materi;
 use Validator;
 use DateTime;
+use PDF;
 class UserController extends Controller
 {
     public function __construct()
@@ -176,7 +177,59 @@ class UserController extends Controller
         $ujian->grade = $this->getGrade($ujian->score);
         return view('user.hasilujian',['ujian'=>$ujian]);
     }
-
+    
+    public function hasilUjianReportpdf(){
+        $ujian = ujian::find(request('ujian_id'));
+        $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId(request('ujian_id'))->first();
+        $total_correct_answer = 0;
+        foreach($ujian->pertanyaans as $pertanyaan){
+            $pertanyaan->jawaban_user = "No Answer";
+            switch($pertanyaan->jawaban_benar){
+                case '1':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_a;
+                    break;
+                case '2':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_b;
+                    break;
+                case '3':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_c;
+                    break;
+                case '4':
+                    $pertanyaan->jawaban_benar_text = $pertanyaan->jawaban_d;
+                    break;
+                default:
+                    break;
+            }
+            foreach($user_ujian->user_ujian_details as $jawaban){
+                if($pertanyaan->id == $jawaban->pertanyaan_id){
+                    switch($jawaban->jawaban){
+                        case '1':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_a;
+                            break;
+                        case '2':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_b;
+                            break;
+                        case '3':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_c;
+                            break;
+                        case '4':
+                            $pertanyaan->jawaban_user = $pertanyaan->jawaban_d;
+                            break;
+                        default:
+                            break;
+                    }
+                    if($pertanyaan->jawaban_benar == $jawaban->jawaban){
+                        $total_correct_answer++;
+                        break;
+                    }
+                }
+            }
+        }
+        $ujian->score = $total_correct_answer/count($ujian->pertanyaans)*1.00;
+        $ujian->grade = $this->getGrade($ujian->score);
+        $pdf = PDF::loadview('user.hasilujianpdf',['ujian'=>$ujian]);
+        return $pdf->download($ujian->exam_title.'.pdf');
+    }
     public function hasilUjianReport(){
         $ujian = ujian::find(request('ujian_id'));
         $user_ujian = user_ujian::whereUserId(\Auth::user()->id)->whereUjianId(request('ujian_id'))->first();

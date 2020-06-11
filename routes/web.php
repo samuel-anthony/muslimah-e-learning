@@ -43,6 +43,7 @@ Route::prefix('user')->group(function (){
     Route::post('/submitAnswer','UserController@submitAnswer');  
     Route::post('/hasilUjian','UserController@hasilUjian');
     Route::post('/exportHasilUjian','UserController@hasilUjianReport');
+    Route::post('/exportHasilUjianpdf','UserController@hasilUjianReportpdf');
     Route::post('/submitNewComment','UserController@submitNewComment');
     Route::post('/replyComment','UserController@replyComment');
     Route::post('/deleteComment','UserController@deleteComment');

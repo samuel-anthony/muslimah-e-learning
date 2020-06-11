@@ -61,7 +61,12 @@
                 <form action="/user/exportHasilUjian" method="POST">
                     @csrf
                     <input value="{{$ujian->id}}" name="ujian_id" style="display:none">
-                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Download Report</button>
+                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Download Report excel</button>
+                </form>
+                <form action="/user/exportHasilUjianpdf" method="POST">
+                    @csrf
+                    <input value="{{$ujian->id}}" name="ujian_id" style="display:none">
+                    <button type="submit" class="btn btn-outline-success btn-sm btn-pill btnSubmit py-2 px-3">Download Report pdf</button>
                 </form>
             </div>
         </div>
